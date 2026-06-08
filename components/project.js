@@ -1,4 +1,6 @@
 const escape = require('../functions/escape');
+const truncate = require('../functions/truncate');
+const emojis = require('../data/emojis.json');
 
 /**
  * Build component with project information
@@ -23,11 +25,11 @@ function project(information) {
                             },
                             ...((information.instructions.length > 0) ? [{
                                 type: 10,
-                                content: `### Instructions\n${escape(information.instructions)}`
+                                content: `### Instructions\n${escape(truncate(information.instructions, 300))}`
                             }] : []),
                             ...((information.description.length > 0) ? [{
                                 type: 10,
-                                content: `### Notes and Credits\n${escape(information.description)}`
+                                content: `### Notes and Credits\n${escape(truncate(information.description, 300))}`
                             }] : [])
                         ],
                         accessory: {
@@ -39,7 +41,7 @@ function project(information) {
                     },
                     {
                         type: 10,
-                        content: `**<:views:1513564664527847444> ${information.stats.views}**\n**<:love:1513564630394601472> ${information.stats.loves}**\n**<:favorite:1513564542523805868> ${information.stats.favorites}**\n**<:remix:1513564587960569958> ${information.stats.remixes}**`
+                        content: `**${emojis.view} ${information.stats.views}**\n**${emojis.love} ${information.stats.loves}**\n**${emojis.favorite} ${information.stats.favorites}**\n**${emojis.remix} ${information.stats.remixes}**`
                     },
                     {
                         "type": 1,
