@@ -38,6 +38,10 @@ function project(information) {
                         },
                     },
                     {
+                        type: 10,
+                        content: `**<:views:1513564664527847444> ${information.stats.views}**\n**<:love:1513564630394601472> ${information.stats.loves}**\n**<:favorite:1513564542523805868> ${information.stats.favorites}**\n**<:remix:1513564587960569958> ${information.stats.remixes}**`
+                    },
+                    {
                         "type": 1,
                         "components": [
                             {
