@@ -28,6 +28,21 @@ const commands = [
         .toJSON(),
 
     new SlashCommandBuilder()
+        .setName('studio')
+        .setDescription('View Scratch studio information')
+        .setContexts([
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+            InteractionContextType.PrivateChannel
+        ])
+        .addNumberOption(option =>
+            option.setName('id')
+                .setDescription('Studio id')
+                .setRequired(true)
+        )
+        .toJSON(),
+
+    new SlashCommandBuilder()
         .setName('profile')
         .setDescription('View Scratch user profile information')
         .setContexts([
