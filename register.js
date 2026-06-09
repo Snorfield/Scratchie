@@ -11,6 +11,16 @@ const commands = [
             InteractionContextType.PrivateChannel
         ])
         .toJSON(),
+    
+    new SlashCommandBuilder()
+        .setName('news')
+        .setDescription('Fetch news from the Scratch Homepage')
+        .setContects([
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+            InteractionContextType.PrivateChannel
+            ])
+         .toJSON(),
 
     new SlashCommandBuilder()
         .setName('explore')
