@@ -11,6 +11,7 @@ const commands = [
             InteractionContextType.PrivateChannel
         ])
         .toJSON(),
+    
     new SlashCommandBuilder()
         .setName('news')
         .setDescription('Fetch news from the Scratch Homepage')
