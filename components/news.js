@@ -21,16 +21,11 @@ function news(information) {
                             {
                                 type: 10,
                                 content: `${escape(truncate(information.news, 300))}`
-                            },
-                        ],
-                        accessory: {
-                            type: 11,
-                            media: {
-                                url: information.image
-                            }
-                        },
-                    },
-                ]
+                          },
+                       ],
+                     }
+                  },
+               },
             }
         ],
         flags: 32768
