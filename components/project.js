@@ -21,7 +21,7 @@ function project(information) {
                         components: [
                             {
                                 type: 10,
-                                content: `# ${escape(information.title)}`
+                                content: `# ${escape(information.title)}\n-# By [${information.author.username}](https://scratch.mit.edu/users/${information.author.username})\n`
                             },
                             ...((information.instructions.length > 0) ? [{
                                 type: 10,
@@ -41,7 +41,7 @@ function project(information) {
                     },
                     {
                         type: 10,
-                        content: `**${emojis.view} ${information.stats.views}**\n**${emojis.love} ${information.stats.loves}**\n**${emojis.favorite} ${information.stats.favorites}**\n**${emojis.remix} ${information.stats.remixes}**`
+                        content: `**${emojis.view} ${information.stats.views} | ${emojis.remix} ${information.stats.remixes} \n ${emojis.love} ${information.stats.loves} | ${emojis.favorite} ${information.stats.favorites}**`
                     },
                     {
                         "type": 1,
