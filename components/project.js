@@ -41,18 +41,30 @@ function project(information) {
                     },
                     {
                         type: 10,
-                        content: `**${emojis.view} ${information.stats.views} | ${emojis.remix} ${information.stats.remixes} \n ${emojis.love} ${information.stats.loves} | ${emojis.favorite} ${information.stats.favorites}**`
+                        content: `**${emojis.view} ${information.stats.views} ${emojis.remix} ${information.stats.remixes} ${emojis.love} ${information.stats.loves} ${emojis.favorite} ${information.stats.favorites}**`
                     },
                     {
-                        "type": 1,
-                        "components": [
+                        type: 1,
+                        components: [
                             {
-                                "type": 2,
-                                "style": 5,
-                                "url": `https://scratch.mit.edu/projects/${information.id}/`,
-                                "label": "Project",
-                                "emoji": null,
+                                type: 2,
+                                style: 5,
+                                url: `https://scratch.mit.edu/projects/${information.id}/`,
+                                label: "Scratch",
+                                emoji: {
+                                    name: "😺"
+                                },
                                 "disabled": false
+                            },
+                            {
+                                type: 2,
+                                style: 5,
+                                url: `https://turbowarp.org/${information.id}/`,
+                                label: "TurboWarp",
+                                emoji: {
+                                    name: "🍡"
+                                },
+                                disabled: false
                             }
                         ]
                     }
