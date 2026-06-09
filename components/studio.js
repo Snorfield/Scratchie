@@ -20,12 +20,16 @@ function studio(information) {
                         components: [
                             {
                                 type: 10,
+                                content: `-# ID: ${information.id} | ${information.stats.projects} projects | ${information.stats.followers} followers`
+                            },
+                            {
+                                type: 10,
                                 content: `# ${escape(information.title)}`
                             },
                             ...((information.description.length > 0) ? [{
                                 type: 10,
                                 content: `${escape(truncate(information.description, 300))}`
-                            }] : []),
+                            }] : [{type: 10, content: '*No studio description*'}]),
                         ],
                         accessory: {
                             type: 11,
