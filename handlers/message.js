@@ -67,19 +67,19 @@ function captureLinks(message) {
 
     if (userLink.test(message.content)) {
         message.reply(components.container(
-            `Hey <@${message.author.id}>, please don't advertise user profiles!\n-# If you weren't you can ignore this.`,
+            `Hey <@${message.author.id}>, please keep profile advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939. \n-# If you weren't advertising, you can ignore this message.`,
             16756224
         ));
     }
     if (projectLink.test(message.content)) {
         message.reply(components.container(
-            `Hey <@${message.author.id}>, please don't advertise projects!\n-# If you weren't you can ignore this.`,
+            `Hey <@${message.author.id}>, please keep project advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939 and https://discord.com/channels/1140996822131802192/1145818943462850581. \n-# If you weren't advertising, you can ignore this message.`,
             16756224
         ));
     }
     if (studioLink.test(message.content)) {
         message.reply(components.container(
-            `Hey <@${message.author.id}>, please don't advertise studios!\n-# If you weren't you can ignore this.`,
+            `Hey <@${message.author.id}>, please keep studio advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939 and https://discord.com/channels/1140996822131802192/1141402927999762462. \n-# If you weren't advertising, you can ignore this message.`,
             16756224
         ));
     }
