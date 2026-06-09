@@ -13,6 +13,16 @@ const commands = [
         .toJSON(),
 
     new SlashCommandBuilder()
+        .setName('explore')
+        .setDescription('Explore new quality scratch projects')
+        .setContexts([
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+            InteractionContextType.PrivateChannel
+        ])
+        .toJSON(),
+
+    new SlashCommandBuilder()
         .setName('project')
         .setDescription('View Scratch project information')
         .setContexts([
