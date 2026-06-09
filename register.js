@@ -19,7 +19,7 @@ const commands = [
             InteractionContextType.Guild,
             InteractionContextType.BotDM,
             InteractionContextType.PrivateChannel
-            ])
+         ])
          .toJSON(),
 
     new SlashCommandBuilder()
