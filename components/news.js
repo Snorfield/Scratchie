@@ -7,7 +7,14 @@ const truncate = require('../functions/truncate');
  * @returns {object}
  */
 
-function news(information) {
+function news(newsList) {
+    const textComponents = newsList.map(function(item) {
+        const formattedContent = `**${item.headline}**\n${item.copy}`;
+        return {
+            type: 10,
+            content: escape(truncate(formattedContent.news, 300))
+        };
+    });
     return {
         components: [
             {
@@ -20,7 +27,7 @@ function news(information) {
                         components: [
                             {
                                 type: 10,
-                                content: `${escape(truncate(information.news, 300))}`
+                                content: textComponents
                           },
                        ],
                      }
