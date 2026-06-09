@@ -54,7 +54,7 @@ function project(information) {
                                 emoji: {
                                     name: "😺"
                                 },
-                                "disabled": false
+                                disabled: false
                             },
                             {
                                 type: 2,
