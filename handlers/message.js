@@ -75,7 +75,7 @@ function captureLinks(message) {
 
         if (userLink.test(message.content)) {
             message.reply(components.container(
-                `Hey <@${message.author.id}>, please keep profile advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939. \n-# If you weren't advertising, you can ignore this message. Btw ur channels id is ${message.channelId}`,
+                `Hey <@${message.author.id}>, please keep profile advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939. \n-# If you weren't advertising, you can ignore this message.`,
                 16756224
             ));
         }
