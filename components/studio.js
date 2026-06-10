@@ -1,3 +1,13 @@
+const {
+    TextDisplayBuilder,
+    ThumbnailBuilder,
+    SectionBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ActionRowBuilder,
+    ContainerBuilder,
+    MessageFlags
+} = require('discord.js');
 const escape = require('../functions/escape');
 const truncate = require('../functions/truncate');
 
@@ -8,53 +18,51 @@ const truncate = require('../functions/truncate');
  */
 
 function studio(information) {
+    const body = [
+        new TextDisplayBuilder().setContent(
+            `-# ID: ${information.id} | ${information.stats.projects} projects | ${information.stats.followers} followers`
+        ),
+        new TextDisplayBuilder().setContent(
+            `# ${escape(information.title)}`
+        )
+    ]
+
+    if (information.description.length > 0) {
+        body.push(
+            new TextDisplayBuilder().setContent(
+                `${escape(truncate(information.description, 300))}`
+            )
+        );
+    } else {
+        body.push(
+            new TextDisplayBuilder().setContent(
+                '*No studio description*'
+            )
+        );
+    }
     return {
         components: [
-            {
-                type: 17,
-                accent_color: 16756224,
-                spoiler: false,
-                components: [
-                    {
-                        type: 9,
-                        components: [
-                            {
-                                type: 10,
-                                content: `-# ID: ${information.id} | ${information.stats.projects} projects | ${information.stats.followers} followers`
-                            },
-                            {
-                                type: 10,
-                                content: `# ${escape(information.title)}`
-                            },
-                            ...((information.description.length > 0) ? [{
-                                type: 10,
-                                content: `${escape(truncate(information.description, 300))}`
-                            }] : [{type: 10, content: '*No studio description*'}]),
-                        ],
-                        accessory: {
-                            type: 11,
-                            media: {
-                                url: information.image
-                            }
-                        },
-                    },
-                    {
-                        "type": 1,
-                        "components": [
-                            {
-                                "type": 2,
-                                "style": 5,
-                                "url": `https://scratch.mit.edu/studios/${information.id}/`,
-                                "label": "Studio",
-                                "emoji": null,
-                                "disabled": false
-                            }
-                        ]
-                    }
-                ]
-            }
+            new ContainerBuilder()
+                .setAccentColor(16756224)
+                .addSectionComponents(
+                    new SectionBuilder()
+                        .setThumbnailAccessory(
+                            new ThumbnailBuilder()
+                                .setURL(information.image)
+                        )
+                        .addTextDisplayComponents(body)
+                )
+                .addActionRowComponents(
+                    new ActionRowBuilder()
+                        .addComponents(
+                            new ButtonBuilder()
+                                .setStyle(ButtonStyle.Link)
+                                .setLabel("Studio")
+                                .setURL(`https://scratch.mit.edu/studios/${information.id}/`)
+                        )
+                )
         ],
-        flags: 32768
+        flags: MessageFlags.IsComponentsV2
     }
 }
 
