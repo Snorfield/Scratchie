@@ -1,3 +1,13 @@
+const {
+    TextDisplayBuilder,
+    ThumbnailBuilder,
+    SectionBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ActionRowBuilder,
+    ContainerBuilder,
+    MessageFlags
+} = require('discord.js');
 const escape = require('../functions/escape');
 const truncate = require('../functions/truncate');
 const emojis = require('../data/emojis.json');
@@ -9,69 +19,65 @@ const emojis = require('../data/emojis.json');
  */
 
 function project(information) {
+    const body = [
+        new TextDisplayBuilder().setContent(
+            `# ${escape(information.title)}\n-# By [${information.author.username}](https://scratch.mit.edu/users/${information.author.username})\n`
+        )
+    ]
+
+    if (information.instructions.length > 0) {
+        body.push(
+            new TextDisplayBuilder().setContent(
+                `### Instructions\n${escape(truncate(information.instructions, 300))}`
+            )
+        );
+    }
+
+    if (information.description.length > 0) {
+        body.push(
+            new TextDisplayBuilder().setContent(
+                `### Notes and Credits\n${escape(truncate(information.description, 300))}`
+            )
+        );
+    }
     return {
         components: [
-            {
-                type: 17,
-                accent_color: 16756224,
-                spoiler: false,
-                components: [
-                    {
-                        type: 9,
-                        components: [
-                            {
-                                type: 10,
-                                content: `# ${escape(information.title)}\n-# By [${information.author.username}](https://scratch.mit.edu/users/${information.author.username})\n`
-                            },
-                            ...((information.instructions.length > 0) ? [{
-                                type: 10,
-                                content: `### Instructions\n${escape(truncate(information.instructions, 300))}`
-                            }] : []),
-                            ...((information.description.length > 0) ? [{
-                                type: 10,
-                                content: `### Notes and Credits\n${escape(truncate(information.description, 300))}`
-                            }] : [])
-                        ],
-                        accessory: {
-                            type: 11,
-                            media: {
-                                url: information.image
-                            }
-                        },
-                    },
-                    {
-                        type: 10,
-                        content: `**${emojis.view} ${information.stats.views} ${emojis.remix} ${information.stats.remixes} ${emojis.love} ${information.stats.loves} ${emojis.favorite} ${information.stats.favorites}**`
-                    },
-                    {
-                        type: 1,
-                        components: [
-                            {
-                                type: 2,
-                                style: 5,
-                                url: `https://scratch.mit.edu/projects/${information.id}/`,
-                                label: "Scratch",
-                                emoji: {
-                                    name: "😺"
-                                },
-                                disabled: false
-                            },
-                            {
-                                type: 2,
-                                style: 5,
-                                url: `https://turbowarp.org/${information.id}/`,
-                                label: "TurboWarp",
-                                emoji: {
-                                    name: "🍡"
-                                },
-                                disabled: false
-                            }
-                        ]
-                    }
-                ]
-            }
+            new ContainerBuilder()
+                .setAccentColor(16756224)
+                .addSectionComponents(
+                    new SectionBuilder()
+                        .setThumbnailAccessory(
+                            new ThumbnailBuilder()
+                                .setURL(information.image)
+                        )
+                        .addTextDisplayComponents(body)
+                )
+                .addTextDisplayComponents(
+                    new TextDisplayBuilder().setContent(
+                        `**${emojis.view} ${information.stats.views} ${emojis.remix} ${information.stats.remixes} ${emojis.love} ${information.stats.loves} ${emojis.favorite} ${information.stats.favorites}**`
+                    )
+                )
+                .addActionRowComponents(
+                    new ActionRowBuilder()
+                        .addComponents(
+                            new ButtonBuilder()
+                                .setStyle(ButtonStyle.Link)
+                                .setLabel("Scratch")
+                                .setEmoji({
+                                    name: "😺",
+                                })
+                                .setURL(`https://scratch.mit.edu/projects/${information.id}/`),
+                            new ButtonBuilder()
+                                .setStyle(ButtonStyle.Link)
+                                .setLabel("TurboWarp")
+                                .setEmoji({
+                                    name: "🍡",
+                                })
+                                .setURL(`https://turbowarp.org/${information.id}/`),
+                        )
+                )
         ],
-        flags: 32768
+        flags: MessageFlags.IsComponentsV2
     }
 }
 
