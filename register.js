@@ -14,13 +14,13 @@ const commands = [
     
     new SlashCommandBuilder()
         .setName('news')
-        .setDescription('Fetch news from the Scratch Homepage')
-        .setContects([
+        .setDescription('View new Scratch news articles')
+        .setContexts([
             InteractionContextType.Guild,
             InteractionContextType.BotDM,
             InteractionContextType.PrivateChannel
-         ])
-         .toJSON(),
+        ])
+        .toJSON(),
 
     new SlashCommandBuilder()
         .setName('explore')
