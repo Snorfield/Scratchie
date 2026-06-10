@@ -47,10 +47,10 @@ async function news(interaction) {
                     ]
                 },
                 {
-                    type: 2,
+                    type: 1,
                     components: [
                         {
-                            type: 2,
+                            type: 1,
                             style: 5,
                             url: "https://scratch.mit.edu/discuss/5",
                             label: "See All News",
