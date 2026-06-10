@@ -56,6 +56,20 @@ async function news(interaction) {
             container.components.pop();
         }
 
+        // View all news articles
+        container.components.push({
+            type: 1,
+            components: [
+                {
+                    type: 2,
+                    style: 5,
+                    url: "https://scratch.mit.edu/discuss/5",
+                    label: "See All News",
+                    disabled: false
+                }
+            ]
+        })
+
         return interaction.editReply({
             components: [container],
             flags: 32768
