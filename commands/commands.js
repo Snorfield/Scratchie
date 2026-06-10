@@ -2,7 +2,7 @@ const get = require('../functions/fetch');
 const components = require('../components/export');
 const pings = require('../data/pings.json');
 
-async function news(interaction) {
+async function commands(interaction) {
     await interaction.deferReply();
 
     const commands = {
@@ -88,4 +88,4 @@ async function news(interaction) {
     }
 }
 
-module.exports = news;
+module.exports = commands;
