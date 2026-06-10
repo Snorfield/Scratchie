@@ -49,6 +49,18 @@ async function commands(interaction) {
         commandCredits: `${pings.snorfield}`
       }
     };
+    
+
+
+let string = '# Commands\n';
+const keys = Object.keys(commands);
+for (let i = 0; i < keys.length; i++)
+  const data = commands[keys[i]];
+  string += `### ${data.commandName}\n${data.commandDescription}\n-# Params: ${data.commandParams}\n-# Credits: ${data.commandCredits}`
+  if (!(i === keys.length - 1)) {
+    string += '\n'
+  }
+}
 
     if (information) {
 
@@ -73,7 +85,7 @@ async function commands(interaction) {
                     components: [
                         {
                             type: 10,
-                            content: `# Commands\n### ${commands.commands.commandName}\n${commands.commands.commandDescription}\n-# Params: ${commands.commands.commandParams}\n-# Credits: ${commands.commandCredits}\n### ${commands.explore.commandName}\n${commands.explore.commandDescription}\n-# Params: ${commands.explore.commandParams}\n-# Credits: ${commands.explore.commandCredits}\n### ${commands.news.commandName}\n${commands.news.commandDescription}\n-# Params: ${commands.news.commandParams}\n-# Credits: ${commands.news.commandCredits}\n### ${commands.project.commandName}\n${commands.project.commandDescription}\n-# Params: ${commands.project.commandParams}\n-# Credits: ${commands.project.commandCredits}\n### ${commands.studio.commandName}\n${commands.studio.commandDescription}\n-# Params: ${commands.studio.commandParams}\n-# Credits: ${commands.studio.commandCredits}\n### ${commands.profile.commandName}\n${commands.profile.commandDescription}\n-# Params: ${commands.profile.commandParams}\n-# Credits: ${commands.profile.commandCredits}\n### ${commands.ping.commandName}\n${commands.ping.commandDescription}\n-# Params: ${commands.ping.commandParams}\n-# Credits: ${commands.ping.commandCredits}`
+                            content: string
                         }
                     ]
                 },
