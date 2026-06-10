@@ -47,6 +47,18 @@ async function news(interaction) {
                     ]
                 },
                 {
+                    type: 2,
+                    components: [
+                        {
+                            type: 2,
+                            style: 5,
+                            url: "https://scratch.mit.edu/discuss/5",
+                            label: "See all News",
+                            disabled: false
+                        }
+                    ]
+                },
+                {
                     type: 14
                 }
             );
