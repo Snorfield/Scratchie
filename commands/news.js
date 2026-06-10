@@ -43,14 +43,9 @@ async function news(interaction) {
                             url: article.url,
                             label: "Article",
                             disabled: false
-                        }
-                    ]
-                },
-                {
-                    type: 1,
-                    components: [
+                        },
                         {
-                            type: 1,
+                            type: 2,
                             style: 5,
                             url: "https://scratch.mit.edu/discuss/5",
                             label: "See All News",
