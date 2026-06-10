@@ -24,7 +24,7 @@ const commands = [
 
     new SlashCommandBuilder()
         .setName('commands')
-        .setDescripttion('View all commands')
+        .setDescription('View all commands')
         .setContexts([
             InteractionContextType.Guild,
             InteractionContextType.BotDM,
