@@ -56,25 +56,26 @@ async function commands(interaction) {
         const data = commands[keys[i]];
         body += `### ${data.name}\n${data.description}\n-# Params: ${data.params}\n-# Credits: ${data.credits}`;
         if (!(i === keys.length - 1)) {
-            string += '\n';
+            body += '\n';
         }
     }
 
     if (body) {
-          const body = [
-        new TextDisplayBuilder().setContent(string)
-    ] 
+        const bodyComponents = [
+            new TextDisplayBuilder().setContent(body)
+        ];
         const container = {
             type: 17,
             accent_color: 16756224,
             spoiler: false,
-            components: body
+            components: bodyComponents
         };
-     return interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2})
+        return interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2 });
     } else {
         return interaction.editReply(components.container(
             "Error while fetching command information!",
             16756224
+        ));
+    }
 }
-
 module.exports = commands;
