@@ -67,23 +67,15 @@ async function commands(interaction) {
             components: []
         };
 
-        container.components.push(
-            {
-                type: 10,
-                content: string
-            }
-        );
-        
-        return interaction.editReply({
-            components: [container],
-            flags: 32768
-        });
+          const body = [
+        new TextDisplayBuilder().setContent(
+            `{$string}`
+        )
+    ] 
     } else {
         return interaction.editReply(components.container(
             "Error while fetching command information!",
             16756224
-        ));
-    }
 }
 
 module.exports = commands;
