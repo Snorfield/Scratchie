@@ -1,9 +1,13 @@
-const { Client, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits, ChannelType } = require('discord.js');
 const { token } = require('./config.json');
 const commands = require('./commands/export');
 const components = require('./components/export');
-const messageHandlers = require('./handlers/message');
 const statuses = require('./data/status.json');
+
+// Handlers
+const messageHandlers = require('./handlers/message');
+const threadHandlers = require('./handlers/thread');
+
 
 const client = new Client({
 	intents: [
@@ -28,16 +32,26 @@ client.on(Events.InteractionCreate, async interaction => {
 
 });
 
-client.on('messageCreate', message => {
+client.on(Events.MessageCreate, message => {
 	// Loop over handler functions and pass the message object into them
 	for (const handler of messageHandlers) {
 		handler(message);
 	}
 });
 
+client.on(Events.ThreadCreate, (thread, created) => {
+	for (const handler of threadHandlers) {
+		handler(thread, created);
+	}
+});
+
 client.once(Events.ClientReady, (readyClient) => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 
+
+	/* TODO
+	Make statuses rotate every so often. Low priority 
+	*/
 	const status = statuses[Math.floor(Math.random() * statuses.length)];
 	client.user.setPresence({
 		activities: [{ name: status.content, type: status.type }],
