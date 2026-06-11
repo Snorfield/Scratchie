@@ -1,4 +1,4 @@
-const { TextDisplayBuilder } = require('discord.js');
+const { TextDisplayBuilder, MessageFlags } = require('discord.js');
 const get = require('../functions/fetch');
 const components = require('../components/export');
 
@@ -61,16 +61,16 @@ async function commands(interaction) {
     }
 
     if (body) {
+          const body = [
+        new TextDisplayBuilder().setContent(string)
+    ] 
         const container = {
             type: 17,
             accent_color: 16756224,
             spoiler: false,
-            components: []
+            components: body
         };
-
-          const body = [
-        new TextDisplayBuilder().setContent(string)
-    ] 
+     return interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2})
     } else {
         return interaction.editReply(components.container(
             "Error while fetching command information!",
