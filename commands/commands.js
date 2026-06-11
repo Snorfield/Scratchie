@@ -1,59 +1,16 @@
 const { TextDisplayBuilder, MessageFlags } = require('discord.js');
 const get = require('../functions/fetch');
 const components = require('../components/export');
+const commandsData = require('../data/commands.json');
 
 async function commands(interaction) {
     await interaction.deferReply();
 
-    const commands = {
-      commands: {
-        name: "/commands",
-        description: "View all commands.",
-        params: "None",
-        credits: "Rosics"
-      },
-      explore: {
-        name: "/explore",
-        description: "Explore new quality Scratch projects.",
-        params: "None",
-        credits: "Snorfield"
-      },
-      news: {
-        name: "/news",
-        description: "View new Scratch news articles.",
-        params: "None",
-        credits: "Rosics & Snorfield"
-      },
-      project: {
-        name: "/project",
-        description: "View Scratch project information.",
-        params: "Project ID",
-        credits: "Snorfield & Joshisaurio"
-      },
-      studio: {
-        name: "/studio",
-        description: "View Scratch studio information.",
-        params: "Studio ID",
-       credits: "Snorfield"
-      },
-      profile: {
-        name: "/profile",
-        description: "View Scratch user profile information.",
-        params: "Username",
-        credits: "Snorfield"
-      },
-      ping: {
-        name: "/ping",
-        description: "Check slash commands.",
-        params: "None",
-        credits: "Snorfield"
-      }
-    };
-    
     let body = '# Commands\n';
-    const keys = Object.keys(commands);
+    const keys = Object.keys(commandsData);
+    
     for (let i = 0; i < keys.length; i++) {
-        const data = commands[keys[i]];
+        const data = commandsData[keys[i]];
         body += `### ${data.name}\n${data.description}\n-# Params: ${data.params}\n-# Credits: ${data.credits}`;
         if (!(i === keys.length - 1)) {
             body += '\n';
@@ -78,4 +35,5 @@ async function commands(interaction) {
         ));
     }
 }
+
 module.exports = commands;
