@@ -1,3 +1,4 @@
+const { TextDisplayBuilder } = require('discord.js');
 const get = require('../functions/fetch');
 const components = require('../components/export');
 
@@ -6,60 +7,60 @@ async function commands(interaction) {
 
     const commands = {
       commands: {
-        commandName: "/commands",
-        commandDescription: "View all commands.",
-        commandParams: "None",
-        commandCredits: `Rosics`
+        name: "/commands",
+        description: "View all commands.",
+        params: "None",
+        credits: "Rosics"
       },
       explore: {
-        commandName: "/explore",
-        commandDescription: "Explore new quality Scratch projects.",
-        commandParams: "None",
-        commandCredits: `Snorfield`
+        name: "/explore",
+        description: "Explore new quality Scratch projects.",
+        params: "None",
+        credits: "Snorfield"
       },
       news: {
-        commandName: "/news",
-        commandDescription: "View new Scratch news articles.",
-        commandParams: "None",
-        commandCredits: `Rosics & Snorfield`
+        name: "/news",
+        description: "View new Scratch news articles.",
+        params: "None",
+        credits: "Rosics & Snorfield"
       },
       project: {
-        commandName: "/project",
-        commandDescription: "View Scratch project information.",
-        commandParams: "Project ID",
-        commandCredits: `Snorfield`
+        name: "/project",
+        description: "View Scratch project information.",
+        params: "Project ID",
+        credits: "Snorfield & Joshisaurio"
       },
       studio: {
-        commandName: "/studio",
-        commandDescription: "View Scratch studio information.",
-        commandParams: "Studio ID",
-        commandCredits: `Snorfield`
+        name: "/studio",
+        description: "View Scratch studio information.",
+        params: "Studio ID",
+       credits: "Snorfield"
       },
       profile: {
-        commandName: "/profile",
-        commandDescription: "View Scratch user profile information.",
-        commandParams: "Username",
-        commandCredits: `Snorfield`
+        name: "/profile",
+        description: "View Scratch user profile information.",
+        params: "Username",
+        credits: "Snorfield"
       },
       ping: {
-        commandName: "/ping",
-        commandDescription: "Check slash commands.",
-        commandParams: "None",
-        commandCredits: `Snorfield`
+        name: "/ping",
+        description: "Check slash commands.",
+        params: "None",
+        credits: "Snorfield"
       }
     };
     
-    let string = '# Commands\n';
+    let body = '# Commands\n';
     const keys = Object.keys(commands);
     for (let i = 0; i < keys.length; i++) {
-        var data = commands[keys[i]];
-        string += `### ${data.commandName}\n${data.commandDescription}\n-# Params: ${data.commandParams}\n-# Credits: ${data.commandCredits}`;
+        const data = commands[keys[i]];
+        body += `### ${data.name}\n${data.description}\n-# Params: ${data.params}\n-# Credits: ${data.credits}`;
         if (!(i === keys.length - 1)) {
             string += '\n';
         }
     }
 
-    if (string) {
+    if (body) {
         const container = {
             type: 17,
             accent_color: 16756224,
@@ -68,9 +69,7 @@ async function commands(interaction) {
         };
 
           const body = [
-        new TextDisplayBuilder().setContent(
-            `{$string}`
-        )
+        new TextDisplayBuilder().setContent(string)
     ] 
     } else {
         return interaction.editReply(components.container(
