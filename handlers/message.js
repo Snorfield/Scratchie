@@ -8,7 +8,7 @@ const channels = require('../data/channels.json');
  */
 
 async function linkProfile(message) {
-    if (channels["allowed_channels"].includes(message.channelId) && channels["allowed_channels"].includes(message.channel.parentId)) {
+    if (channels["allowed_channels"].includes(message.channelId) || channels["allowed_channels"].includes(message.channel.parentId)) {
         const matches = (message.content).match(/scratch\.mit\.edu\/users\/([a-zA-Z0-9-_]+)/);
         if (matches) {
             const username = matches[1];
@@ -28,7 +28,7 @@ async function linkProfile(message) {
  */
 
 async function linkProject(message) {
-    if (channels["allowed_channels"].includes(message.channelId) && channels["allowed_channels"].includes(message.channel.parentId)) {
+    if (channels["allowed_channels"].includes(message.channelId) || channels["allowed_channels"].includes(message.channel.parentId)) {
         const matches = (message.content).match(/scratch\.mit\.edu\/projects\/([0-9]+)/);
         if (matches) {
             const id = matches[1];
@@ -48,7 +48,7 @@ async function linkProject(message) {
  */
 
 async function linkStudio(message) {
-    if (channels["allowed_channels"].includes(message.channelId) && channels["allowed_channels"].includes(message.channel.parentId)) {
+    if (channels["allowed_channels"].includes(message.channelId) || channels["allowed_channels"].includes(message.channel.parentId)) {
         const matches = (message.content).match(/scratch\.mit\.edu\/studios\/([0-9]+)/);
         if (matches) {
             const id = matches[1];
