@@ -21,12 +21,9 @@ async function commands(interaction) {
         const bodyComponents = [
             new TextDisplayBuilder().setContent(body)
         ];
-        const container = {
-            type: 17,
-            accent_color: 16756224,
-            spoiler: false,
-            components: bodyComponents
-        };
+
+         new ContainerBuilder()
+            .setAccentColor(16756224)
         return interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2 });
     } else {
         return interaction.editReply(components.container(
