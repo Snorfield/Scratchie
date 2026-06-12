@@ -33,7 +33,6 @@ async function commands(interaction) {
             "Error while fetching command information!",
             16756224
         ));
-    }
 }
 
 module.exports = commands;
