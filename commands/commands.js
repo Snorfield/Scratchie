@@ -27,6 +27,9 @@ async function commands(interaction) {
                     new TextDisplayBuilder().setContent(body)
                     )
         ]
+
+      components: [], flags: MessageFlags.IsComponentsV2
+
     }
     } else {
         return interaction.editReply(components.container(
