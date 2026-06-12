@@ -28,7 +28,7 @@ async function commands(interaction) {
                     )
         ]
 
-      components: [], flags: MessageFlags.IsComponentsV2
+      flags: MessageFlags.IsComponentsV2
 
     }
     } else {
