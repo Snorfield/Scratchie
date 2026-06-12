@@ -1,6 +1,8 @@
 const get = require('../functions/fetch');
 const components = require('../components/export');
 const channels = require('../data/channels.json');
+const answers = require('../data/eightball.json');
+const { clientId } = require('../config.json');
 
 /**
  * Capture Scratch profile links and send a preview of them
@@ -94,9 +96,18 @@ function captureLinks(message) {
     }
 }
 
+function eightball(message) {
+    if (message.mentions.users.has(clientId)) {
+        if (/is this true/i.test(message.content)) {
+            message.reply(answers[Math.floor(Math.random() * answers.length)]);
+        }
+    }
+}
+
 module.exports = [
     linkProfile,
     linkProject,
     linkStudio,
-    captureLinks
+    captureLinks,
+    eightball
 ]
