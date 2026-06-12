@@ -97,10 +97,17 @@ function captureLinks(message) {
 }
 
 function eightball(message) {
-    if (message.mentions.users.has(clientId)) {
-        if (/is this true/i.test(message.content)) {
-            message.reply(answers[Math.floor(Math.random() * answers.length)]);
-        }
+    const keywords = ["true", "false", "right", "wrong", "bad"];
+
+    if (
+        message.mentions.users.has(clientId) &&
+        keywords.some(word =>
+            message.content.toLowerCase().includes(word)
+        )
+    ) {
+        return message.reply(
+            answers[Math.floor(Math.random() * answers.length)]
+        );
     }
 }
 
