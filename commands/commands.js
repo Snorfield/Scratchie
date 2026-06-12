@@ -19,13 +19,15 @@ async function commands(interaction) {
     }
 
     if (body) {
-        const bodyComponents = [
-            new TextDisplayBuilder().setContent(body)
-        ];
-
-         new ContainerBuilder()
-            .setAccentColor(16756224)
-        return interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2 });
+   return {
+        components: [
+            new ContainerBuilder()
+                .setAccentColor(16756224)
+                .addTextDisplayComponents(
+                    new TextDisplayBuilder().setContent(body)
+                    )
+        ]
+    }
     } else {
         return interaction.editReply(components.container(
             "Error while fetching command information!",
