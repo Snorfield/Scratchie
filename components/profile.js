@@ -17,7 +17,6 @@ const escape = require('../functions/escape');
  */
 
 function profile(information) {
-    let body;
     const rawDate = `${information.history.joined}`;
     const date = new Date(rawDate);
 
@@ -27,15 +26,8 @@ function profile(information) {
         day: 'numeric'
     });
 
-    if (information.scratchteam) {
-        body = [
-            new TextDisplayBuilder().setContent(`# ${escape(information.username)}*`)
-        ];
-    } else {
-        body = [
-            new TextDisplayBuilder().setContent(`# ${escape(information.username)}`)
-        ];
-    }
+
+    let body = new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}`);
 
     if (information.profile.bio.length > 0) {
         body.push(
