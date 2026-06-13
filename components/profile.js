@@ -12,30 +12,30 @@ const escape = require('../functions/escape');
 
 /**
  * Build component with user information
- * @param {object} information 
+ * @param {object} information
  * @returns {object}
  */
 
 function profile(information) {
-let body;
-const rawDate = `${information.history.joined}`;
-const date = new Date(rawDate);
+    let body;
+    const rawDate = `${information.history.joined}`;
+    const date = new Date(rawDate);
 
-const formattedDate = date.toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-});
+    const formattedDate = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
 
     if (information.scratchteam) {
         body = [
-        new TextDisplayBuilder().setContent(`# ${escape(information.username)}*`)
+            new TextDisplayBuilder().setContent(`# ${escape(information.username)}*`)
         ];
     } else {
         body = [
-        new TextDisplayBuilder().setContent(`# ${escape(information.username)}`)
+            new TextDisplayBuilder().setContent(`# ${escape(information.username)}`)
         ];
-      }
+    }
 
     if (information.profile.bio.length > 0) {
         body.push(
@@ -51,27 +51,27 @@ const formattedDate = date.toLocaleDateString('en-US', {
     return {
         components: [
             new ContainerBuilder()
-                .setAccentColor(16756224)
-                .addSectionComponents(
-                    new SectionBuilder()
-                        .setThumbnailAccessory(
-                            new ThumbnailBuilder()
-                                .setURL(information.profile.images['60x60'])
-                        )
-                        .addTextDisplayComponents(body)
+            .setAccentColor(16756224)
+            .addSectionComponents(
+                new SectionBuilder()
+                .setThumbnailAccessory(
+                    new ThumbnailBuilder()
+                    .setURL(information.profile.images['60x60'])
                 )
-                .addActionRowComponents(
-                    new ActionRowBuilder()
-                        .addComponents(
-                            new ButtonBuilder()
-                                .setStyle(ButtonStyle.Link)                      
-                                .setLabel("Profile")
-                                .setEmoji({
-                                name: "😺",
-                                })                                
-                                .setURL(`https://scratch.mit.edu/users/${information.username}/`)
-                        )
+                .addTextDisplayComponents(body)
+            )
+            .addActionRowComponents(
+                new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                    .setStyle(ButtonStyle.Link)
+                    .setLabel("Profile")
+                    .setEmoji({
+                        name: "😺",
+                    })
+                    .setURL(`https://scratch.mit.edu/users/${information.username}/`)
                 )
+            )
         ],
         flags: MessageFlags.IsComponentsV2
     }
