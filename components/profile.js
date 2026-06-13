@@ -26,7 +26,6 @@ function profile(information) {
         day: 'numeric'
     });
 
-
     let body = new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}`);
 
     if (information.profile.bio.length > 0) {
