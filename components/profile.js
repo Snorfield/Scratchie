@@ -19,18 +19,22 @@ const escape = require('../functions/escape');
 function profile(information) {
     const rawDate = `${information.history.joined}`;
     const date = new Date(rawDate);
-
+    const joinedYear = date.getFullYear();
+    const currentYear = new Date().getFullYear();
+    const years = currentYear - joinedYear;
     const formattedDate = date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     });
 
-    let body = new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}`);
+    let body = [
+        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}\n*${information.id} · ${formattedDate} · ${information.profile.country} · About ${years} years on Scratch*`)
+    ];
 
     if (information.profile.bio.length > 0) {
         body.push(
-            new TextDisplayBuilder().setContent(`*${information.id} · ${formattedDate} · ${information.profile.country}*\n### About me\n${escape(information.profile.bio)}`)
+            new TextDisplayBuilder().setContent(`\n### About me\n${escape(information.profile.bio)}`)
         );
     }
 
@@ -39,6 +43,13 @@ function profile(information) {
             new TextDisplayBuilder().setContent(`### What I'm working on\n${escape(information.profile.status)}`)
         );
     }
+
+    if (information.profile.bio.length === 0 && information.profile.status.length === 0) {
+        body.push(
+            new TextDisplayBuilder().setContent(`This profile has nothing else to display.`)
+        );
+    }
+
     return {
         components: [
             new ContainerBuilder()
