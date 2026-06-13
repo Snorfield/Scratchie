@@ -97,16 +97,40 @@ function captureLinks(message) {
 }
 
 function eightball(message) {
-    const keywords = ["true", "false", "right", "wrong", "bad"];
+    const content = message.content.toLowerCase();
+    const keywords = [
+        "true", 
+        "false", 
+        "right", 
+        "wrong", 
+        "bad",
+        "correct",
+        "incorrect"
+    ];
 
     if (
-        message.mentions.users.has(clientId) &&
+        (message.mentions.users.has(clientId) || content.includes('scratchie')) &&
         keywords.some(word =>
-            message.content.toLowerCase().includes(word)
+            content.includes(word)
         )
     ) {
         return message.reply(
             answers[Math.floor(Math.random() * answers.length)]
+        );
+    }
+}
+
+function greet(message) {
+    const content = message.content.toLowerCase();
+    const replies = ['Hi!!', 'Nice to see you, hi!', 'Hello there!'];
+
+    const mentioned = message.mentions.users.has(clientId) || /\bscratchie\b/i.test(content);
+
+    const greeting = /\b(hi|hello)\b/i.test(content);
+
+    if (mentioned && greeting) {
+        return message.reply(
+            replies[Math.floor(Math.random() * replies.length)]
         );
     }
 }
@@ -116,5 +140,6 @@ module.exports = [
     linkProject,
     linkStudio,
     captureLinks,
-    eightball
+    eightball,
+    greet
 ]
