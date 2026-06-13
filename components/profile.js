@@ -17,13 +17,29 @@ const escape = require('../functions/escape');
  */
 
 function profile(information) {
-    const body = [
+let body;
+const rawDate = `${information.history.joined}`;
+const date = new Date(rawDate);
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+    if (information.scratchteam) {
+        body = [
+        new TextDisplayBuilder().setContent(`# ${escape(information.username)}*`)
+        ];
+    } else {
+        body = [
         new TextDisplayBuilder().setContent(`# ${escape(information.username)}`)
-    ]
+        ];
+      }
 
     if (information.profile.bio.length > 0) {
         body.push(
-            new TextDisplayBuilder().setContent(`*${information.id} | ${information.profile.country}*\n### About me\n${escape(information.profile.bio)}`)
+            new TextDisplayBuilder().setContent(`*${information.id} · ${formattedDate} · ${information.profile.country}*\n### About me\n${escape(information.profile.bio)}`)
         );
     }
 
@@ -48,8 +64,11 @@ function profile(information) {
                     new ActionRowBuilder()
                         .addComponents(
                             new ButtonBuilder()
-                                .setStyle(ButtonStyle.Link)
+                                .setStyle(ButtonStyle.Link)                      
                                 .setLabel("Profile")
+                                .setEmoji({
+                                name: "😺",
+                                })                                
                                 .setURL(`https://scratch.mit.edu/users/${information.username}/`)
                         )
                 )
