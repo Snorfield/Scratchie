@@ -8,11 +8,6 @@ const statuses = require('./data/status.json');
 const messageHandlers = require('./handlers/message');
 const threadHandlers = require('./handlers/thread');
 
-// Goose
-const gooseChannel = "1140996823364943933";
-const startGooseLore = require('./handlers/goose');
-
-
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
@@ -61,11 +56,6 @@ client.once(Events.ClientReady, async (readyClient) => {
 		activities: [{ name: status.content, type: status.type }],
 		status: 'online',
 	});
-
-	// Very goose
-	const channel = await client.channels.fetch(gooseChannel);
-
-	startGooseLore(channel);
 });
 
 client.login(token);
