@@ -19,9 +19,7 @@ const escape = require('../functions/escape');
 function profile(information) {
     const rawDate = `${information.history.joined}`;
     const date = new Date(rawDate);
-    const joinedYear = date.getFullYear();
     const currentYear = new Date().getFullYear();
-    const years = currentYear - joinedYear;
     const formattedDate = date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
@@ -29,7 +27,7 @@ function profile(information) {
     });
 
     let body = [
-        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}\n*${information.id} · ${formattedDate} · ${information.profile.country} · About ${years} years on Scratch*`)
+        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}\n*${information.id} · ${formattedDate} · ${information.profile.country}*`)
     ];
 
     if (information.profile.bio.length > 0) {
