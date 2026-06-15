@@ -4,7 +4,7 @@ const profile = require('./profile');
 const studio = require('./studio');
 const explore = require('./explore');
 const news = require('./news');
-const news = require('./verify');
+const verify = require('./verify');
 
 module.exports = {
     ping,
