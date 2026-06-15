@@ -4,6 +4,7 @@ const profile = require('./profile');
 const studio = require('./studio');
 const explore = require('./explore');
 const news = require('./news');
+const news = require('./verify');
 
 module.exports = {
     ping,
@@ -11,5 +12,6 @@ module.exports = {
     profile,
     studio,
     explore,
-    news
+    news,
+    verify
 }
