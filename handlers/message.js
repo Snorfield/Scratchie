@@ -3,6 +3,8 @@ const components = require('../components/export');
 const channels = require('../data/channels.json');
 const answers = require('../data/eightball.json');
 const { clientId } = require('../config.json');
+const normalize = require('../functions/normalize');
+const crypto = require('crypto');
 
 /**
  * Capture Scratch profile links and send a preview of them
@@ -105,7 +107,9 @@ function eightball(message) {
         "wrong", 
         "bad",
         "correct",
-        "incorrect"
+        "incorrect",
+        "good",
+        "real"
     ];
 
     if (
@@ -114,8 +118,9 @@ function eightball(message) {
             content.includes(word)
         )
     ) {
+        const hash = crypto.createHash('sha256').update(normalize(message.content)).digest();
         return message.reply(
-            answers[Math.floor(Math.random() * answers.length)]
+            answers[hash.readUInt32BE(0) % answers.length]
         );
     }
 }
