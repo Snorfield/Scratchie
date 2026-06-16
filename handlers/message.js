@@ -98,8 +98,9 @@ function captureLinks(message) {
     }
 }
 
-function eightball(message) {
+async function eightball(message) {
     const content = message.content.toLowerCase();
+    const normalized = normalize(message.content);
     const keywords = [
         "true", 
         "false", 
@@ -118,10 +119,26 @@ function eightball(message) {
             content.includes(word)
         )
     ) {
-        const hash = crypto.createHash('sha256').update(normalize(message.content)).digest();
-        return message.reply(
-            answers[hash.readUInt32BE(0) % answers.length]
-        );
+        let toHash = normalized;
+
+        if (message.reference?.messageId) {
+            const reply = await message.fetchReference().catch(() => null);
+
+            if (reply) {
+                toHash = `${normalize(reply.content)} ${normalized}`;
+            }
+        }
+
+        if (toHash.split(' ').length > 4 || message.reference?.messageId) {
+            const hash = crypto.createHash('sha256').update(toHash).digest();
+            return message.reply(
+                answers[hash.readUInt32BE(0) % answers.length]
+            );
+        } else {
+            return message.reply(
+                answers[Math.floor(Math.random() * answers.length)]
+            );
+        }
     }
 }
 
