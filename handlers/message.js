@@ -5,6 +5,7 @@ const answers = require('../data/eightball.json');
 const { clientId } = require('../config.json');
 const normalize = require('../functions/normalize');
 const crypto = require('crypto');
+const semanticize = require('../functions/semanticize');
 
 /**
  * Capture Scratch profile links and send a preview of them
@@ -102,10 +103,10 @@ async function eightball(message) {
     const content = message.content.toLowerCase();
     const normalized = normalize(message.content);
     const keywords = [
-        "true", 
-        "false", 
-        "right", 
-        "wrong", 
+        "true",
+        "false",
+        "right",
+        "wrong",
         "bad",
         "correct",
         "incorrect",
@@ -129,8 +130,8 @@ async function eightball(message) {
             }
         }
 
-        if (toHash.split(' ').length > 4 || message.reference?.messageId) {
-            const hash = crypto.createHash('sha256').update(toHash).digest();
+        if (semanticize(toHash).split(' ').length > 2 || message.reference?.messageId) {
+            const hash = crypto.createHash('sha256').update(semanticize(toHash)).digest();
             return message.reply(
                 answers[hash.readUInt32BE(0) % answers.length]
             );
