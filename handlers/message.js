@@ -99,6 +99,33 @@ function captureLinks(message) {
     }
 }
 
+/**
+ * Capture Scratch help with project keywords to warn the user to use project help
+ * @param {object} message 
+ */
+
+function captureHelp(message) {
+    if (!channels["allowed_channels"].includes(message.channelId) && !channels["allowed_channels"].includes(message.channel.parentId)) {
+        const keywords = [
+            /\bneed\s+help\s+(with|on|for)\s+(my\s+)?projects?\b/i,
+            /\b(can|could|anyone|someone)\s+help\s+me\b/i,
+            /\bstuck\s+(on|with)\s+(my\s+)?(project|code|script|scratch)\b/i,
+            /\bhow\s+(do\s+i|to)\s+(make|fix|code|program)\b/i,
+            /\b(project|code|script|game|bot)\s+(is\s+broken|isnt\s+working|not\s+working|glitched)\b/i,
+            /\b(looking\s+for|need|want)\s+(a\s+)?(coder|programmer|developer|collaborator)s?\b/i,
+            /\b(help\s+with\s+a\s+)?(bug|error|glitch|issue)s?\b/i
+        ];
+
+        if (keywords.some(regex => regex.test(message.content))) {
+            message.reply(components.container(
+                `Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887⁠ if you need help!`,
+                16756224
+            ));
+        }
+
+    }
+}
+
 async function eightball(message) {
     const content = message.content.toLowerCase();
     const normalized = normalize(message.content);
