@@ -2,10 +2,15 @@ const get = require('../functions/fetch');
 const components = require('../components/export');
 const channels = require('../data/channels.json');
 const answers = require('../data/eightball.json');
-const { clientId } = require('../config.json');
+const {
+    clientId
+} = require('../config.json');
 const normalize = require('../functions/normalize');
 const crypto = require('crypto');
 const semanticize = require('../functions/semanticize');
+const cooldowns = new Set();
+const warnedUsers = new Set();
+const cooldownTime = 3000;
 
 /**
  * Capture Scratch profile links and send a preview of them
@@ -120,6 +125,24 @@ async function eightball(message) {
             content.includes(word)
         )
     ) {
+        const username = message.author.username;
+
+        if (cooldowns.has(username)) {
+            if (!warnedUsers.has(username)) {
+                warnedUsers.add(username);
+                return message.reply("stop spamming");
+            }
+            return;
+        }
+
+        cooldowns.add(username);
+
+        setTimeout(() => {
+            cooldowns.delete(username);
+            warnedUsers.delete(username);
+        }, cooldownTime);
+
+
         let toHash = normalized;
 
         if (message.reference?.messageId) {
