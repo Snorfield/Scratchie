@@ -2,7 +2,9 @@ const get = require('../functions/fetch');
 const components = require('../components/export');
 const channels = require('../data/channels.json');
 const answers = require('../data/eightball.json');
-const { clientId } = require('../config.json');
+const {
+    clientId
+} = require('../config.json');
 const normalize = require('../functions/normalize');
 const crypto = require('crypto');
 const semanticize = require('../functions/semanticize');
@@ -102,6 +104,9 @@ function captureLinks(message) {
 async function eightball(message) {
     const content = message.content.toLowerCase();
     const normalized = normalize(message.content);
+    const cooldownTime = 5000;
+    const cooldowns = new Set();
+    const warnedUsers = new Set();
     const keywords = [
         "true",
         "false",
@@ -120,6 +125,18 @@ async function eightball(message) {
             content.includes(word)
         )
     ) {
+        const userId = message.author.id;
+
+        if (cooldowns.has(userId)) {
+            if (!warnedUsers.has(userId)) {
+                warnedUsers.add(userId);
+                return message.reply("stop spamming");
+            }
+            return;
+        }
+
+        cooldowns.add(userId);
+
         let toHash = normalized;
 
         if (message.reference?.messageId) {
@@ -141,6 +158,11 @@ async function eightball(message) {
             );
         }
     }
+
+    setTimeout(() => {
+        cooldowns.delete(userId);
+        warnedUsers.delete(userId);
+    }, cooldownTime);
 }
 
 function greet(message) {
