@@ -99,27 +99,79 @@ function captureLinks(message) {
     }
 }
 
-async function eightball(message) {
-    const content = message.content.toLowerCase();
-    const normalized = normalize(message.content);
-    const keywords = [
-        "true",
-        "false",
-        "right",
-        "wrong",
-        "bad",
-        "correct",
-        "incorrect",
-        "good",
-        "real"
-    ];
+function escapeRegExp(text) {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
-    if (
-        (message.mentions.users.has(clientId) || content.includes('scratchie')) &&
-        keywords.some(word =>
-            content.includes(word)
-        )
-    ) {
+function addressText(message) {
+    let content = message.content.toLowerCase();
+
+    if (clientId) {
+        content = content.replace(new RegExp(`<@!?${escapeRegExp(clientId)}>`, 'g'), ' scratchie ');
+    }
+
+    if (message.mentions.users.has(clientId) && !/\bscratchie\b/i.test(content)) {
+        content = `scratchie ${content}`;
+    }
+
+    return content.replace(/\s+/g, ' ').trim();
+}
+
+function isGreetingToScratchie(message) {
+    const content = addressText(message);
+
+    return (
+        /\b(?:hi|hello)\s*(?:[,;:-]+\s*)?scratchie\b/i.test(content) ||
+        /\bscratchie\s*(?:[,;:-]+\s*)?(?:hi|hello)\b/i.test(content)
+    );
+}
+
+function isAddressedQuestionText(text, markedQuestion) {
+    const auxCue = "(?:do|does|did|can|could|would|will|should|has|have|had|may|might|must|isn'?t|aren'?t|wasn'?t|weren'?t|don'?t|doesn'?t|didn'?t|can'?t|couldn'?t|wouldn'?t|won'?t|shouldn'?t|hasn'?t|haven'?t|hadn'?t|mightn'?t|mustn'?t)\\b";
+    const beCue = "(?:is|are|am|was|were)\\s+(?:(?:this|that|it|these|those|you|i|we|they|he|she|my|your|our|their|his|her|the|a|an)\\b|there\\s+(?!scratchie\\b)[a-z0-9_]+\\b)";
+    const yesNoCue = `(?:${auxCue}|${beCue})`;
+    const informalYesNoCue = '(?:(?:u|you)\\s+(?:think|reckon|believe|feel))\\b';
+    const nonYesNoCue = '(?:what|who|when|where|why|how|please|pls|tell|explain|describe|show|give|make|help)\\b';
+    const requestCue = "(?:can|could|would|will|should|do)\\s+you\\s+(?:check|review|explain|tell|show|give|make|help|fix|describe)\\b";
+    const scratchieQuestionStart = new RegExp(`(?:^|[,;:!-]+\\s*)(?:hey\\s+)?scratchie\\b\\s*(?:[,;:!-]+\\s*)?(?:${yesNoCue}|${informalYesNoCue})`, 'i');
+    const scratchieGreetingQuestionStart = new RegExp(`\\b(?:hi|hello)\\s*(?:[,;:!-]+\\s*)?scratchie\\b\\s*(?:[,;:!-]+\\s*)?(?:${yesNoCue}|${informalYesNoCue})`, 'i');
+    const scratchieRequestStart = new RegExp(`(?:^|[,;:!-]+\\s*)(?:hey\\s+)?scratchie\\b\\s*(?:[,;:!-]+\\s*)?${requestCue}`, 'i');
+    const scratchieMarkedQuestionStart = new RegExp(`(?:^|[,;:!-]+\\s*)(?:hey\\s+)?scratchie\\b(?:\\s*[,;:!-]+\\s*|\\s+)(?!${nonYesNoCue})(?=\\b(?!scratchie\\b)[a-z0-9_]+\\b)`, 'i');
+    const scratchieEnd = /\bscratchie\s*$/i;
+    const scratchieEndQuestion = /\b(?!scratchie\b)[a-z0-9_]+\b.*\bscratchie\s*$/i;
+    const indirectEnd = /\b(?:to|about|with|for|from|at|near|around|of)\s+scratchie\s*$/i;
+    const objectEnd = /\b(?:know|knew|known|meet|met|see|saw|seen|find|found|remember|like|hate|love|called|named)\s+scratchie\s*$/i;
+    const greetingEnd = /\b(?:hi|hello)\s*(?:[,;:-]\s*)?scratchie\s*$/i;
+    const nonYesNoStart = new RegExp(`^\\s*(?:${nonYesNoCue})`, 'i');
+    const yesNoStart = new RegExp(`^\\s*(?:${yesNoCue}|${informalYesNoCue})`, 'i');
+    const requestStart = new RegExp(`^\\s*${requestCue}`, 'i');
+    const approvalEnd = /\b(?:right|correct|true|false|real|good|bad|okay|ok|alright|wrong|fine|works|work|valid|approved|approve)\b.*\bscratchie\s*$/i;
+    const addressedEnd = scratchieEndQuestion.test(text) && scratchieEnd.test(text) && !indirectEnd.test(text) && !objectEnd.test(text) && !greetingEnd.test(text) && !nonYesNoStart.test(text) && !requestStart.test(text);
+
+    if (markedQuestion) {
+        return ((scratchieQuestionStart.test(text) || scratchieGreetingQuestionStart.test(text)) && !scratchieRequestStart.test(text)) || (scratchieMarkedQuestionStart.test(text) && !scratchieRequestStart.test(text)) || addressedEnd;
+    }
+
+    return ((scratchieQuestionStart.test(text) || scratchieGreetingQuestionStart.test(text)) && !scratchieRequestStart.test(text)) || (addressedEnd && (yesNoStart.test(text) || approvalEnd.test(text)));
+}
+
+function isQuestionToScratchie(message) {
+    const content = addressText(message);
+    const questions = content
+        .split('?')
+        .slice(0, -1)
+        .map(part => part.split(/[.!]/).pop().trim());
+
+    return (
+        questions.some(question => isAddressedQuestionText(question, true)) ||
+        isAddressedQuestionText(content, false)
+    );
+}
+
+async function eightball(message) {
+    const normalized = normalize(message.content);
+
+    if (isQuestionToScratchie(message)) {
         let toHash = normalized;
 
         if (message.reference?.messageId) {
@@ -144,14 +196,9 @@ async function eightball(message) {
 }
 
 function greet(message) {
-    const content = message.content.toLowerCase();
     const replies = ['Hi!!', 'Nice to see you, hi!', 'Hello there!'];
 
-    const mentioned = message.mentions.users.has(clientId) || /\bscratchie\b/i.test(content);
-
-    const greeting = /\b(hi|hello)\b/i.test(content);
-
-    if (mentioned && greeting) {
+    if (isGreetingToScratchie(message)) {
         return message.reply(
             replies[Math.floor(Math.random() * replies.length)]
         );
