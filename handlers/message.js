@@ -6,6 +6,8 @@ const { clientId } = require('../config.json');
 const normalize = require('../functions/normalize');
 const crypto = require('crypto');
 const semanticize = require('../functions/semanticize');
+const challenges = require('../data/challenges.json');
+const randomArrayInt = require('../functions/random');
 
 /**
  * Capture Scratch profile links and send a preview of them
@@ -145,7 +147,7 @@ async function eightball(message) {
 
 function greet(message) {
     const content = message.content.toLowerCase();
-    const replies = ['Hi!!', 'Nice to see you, hi!', 'Hello there!'];
+    const replies = ['Hi!!', 'Nice to see you, hi!', 'Hello there!', 'Yo!', 'How\'s it going?'];
 
     const mentioned = message.mentions.users.has(clientId) || /\bscratchie\b/i.test(content);
 
@@ -158,11 +160,43 @@ function greet(message) {
     }
 }
 
+function truthOrDare(message) {
+    const content = message.content.toLowerCase();
+    const normalized = normalize(message.content);
+
+    function truth() {
+        const beginning = challenges.message[randomArrayInt(challenges.message.length)];
+        const truth = challenges.truths[randomArrayInt(challenges.truths.length)];
+        return `${beginning} ${truth}`;
+    }
+
+    function dare() {
+        const beginning = challenges.message[randomArrayInt(challenges.message.length)];
+        const dare = challenges.dares[randomArrayInt(challenges.dares.length)];
+        return `${beginning} ${dare}`;
+    }
+
+    if ((message.mentions.users.has(clientId) || content.includes('scratchie'))) {
+        if (normalized.includes('truth') && normalized.includes('dare')) {
+            if (Math.random() >= 0.5) {
+                return message.reply(truth());
+            } else {
+                return message.reply(dare());
+            }
+        } else if (normalized.includes('truth')) {
+            return message.reply(truth());
+        } else if (normalized.includes('dare')) {
+            return message.reply(dare());
+        }
+    }
+}
+
 module.exports = [
     linkProfile,
     linkProject,
     linkStudio,
     captureLinks,
     eightball,
-    greet
+    greet,
+    truthOrDare
 ]
