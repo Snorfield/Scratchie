@@ -8,6 +8,7 @@ const crypto = require('crypto');
 const semanticize = require('../functions/semanticize');
 const challenges = require('../data/challenges.json');
 const randomArrayInt = require('../functions/random');
+const type = require('../functions/type.js');
 
 /**
  * Capture Scratch profile links and send a preview of them
@@ -15,6 +16,7 @@ const randomArrayInt = require('../functions/random');
  */
 
 async function linkProfile(message) {
+    if (message.author.id === clientId) return;
     if (channels["allowed_channels"].includes(message.channelId) || channels["allowed_channels"].includes(message.channel.parentId)) {
         const matches = (message.content).match(/scratch\.mit\.edu\/users\/([a-zA-Z0-9-_]+)/);
         if (matches) {
@@ -35,6 +37,7 @@ async function linkProfile(message) {
  */
 
 async function linkProject(message) {
+    if (message.author.id === clientId) return;
     if (channels["allowed_channels"].includes(message.channelId) || channels["allowed_channels"].includes(message.channel.parentId)) {
         const matches = (message.content).match(/scratch\.mit\.edu\/projects\/([0-9]+)/);
         if (matches) {
@@ -55,6 +58,7 @@ async function linkProject(message) {
  */
 
 async function linkStudio(message) {
+    if (message.author.id === clientId) return;
     if (channels["allowed_channels"].includes(message.channelId) || channels["allowed_channels"].includes(message.channel.parentId)) {
         const matches = (message.content).match(/scratch\.mit\.edu\/studios\/([0-9]+)/);
         if (matches) {
@@ -75,6 +79,7 @@ async function linkStudio(message) {
  */
 
 function captureLinks(message) {
+    if (message.author.id === clientId) return;
     if (!channels["allowed_channels"].includes(message.channelId) && !channels["allowed_channels"].includes(message.channel.parentId)) {
         const userLink = /https:\/\/scratch\.mit\.edu\/users\/\S+/g;
         const projectLink = /https:\/\/scratch\.mit\.edu\/projects\/\S+/g;
@@ -102,6 +107,7 @@ function captureLinks(message) {
 }
 
 async function eightball(message) {
+    if (message.author.id === clientId) return;
     const content = message.content.toLowerCase();
     const normalized = normalize(message.content);
     const keywords = [
@@ -134,10 +140,12 @@ async function eightball(message) {
 
         if (semanticize(toHash).split(' ').length > 2 || message.reference?.messageId) {
             const hash = crypto.createHash('sha256').update(semanticize(toHash)).digest();
+            await type(message);
             return message.reply(
                 answers[hash.readUInt32BE(0) % answers.length]
             );
         } else {
+            await type(message);
             return message.reply(
                 answers[Math.floor(Math.random() * answers.length)]
             );
@@ -145,7 +153,8 @@ async function eightball(message) {
     }
 }
 
-function greet(message) {
+async function greet(message) {
+    if (message.author.id === clientId) return;
     const content = message.content.toLowerCase();
     const replies = ['Hi!!', 'Nice to see you, hi!', 'Hello there!', 'Yo!', 'How\'s it going?'];
 
@@ -154,13 +163,15 @@ function greet(message) {
     const greeting = /\b(hi|hello)\b/i.test(content);
 
     if (mentioned && greeting) {
+        await type(message);
         return message.reply(
             replies[Math.floor(Math.random() * replies.length)]
         );
     }
 }
 
-function truthOrDare(message) {
+async function truthOrDare(message) {
+    if (message.author.id === clientId) return;
     const content = message.content.toLowerCase();
     const normalized = normalize(message.content);
 
@@ -178,14 +189,17 @@ function truthOrDare(message) {
 
     if ((message.mentions.users.has(clientId) || content.includes('scratchie'))) {
         if (normalized.includes('truth') && normalized.includes('dare')) {
+            await type(message);
             if (Math.random() >= 0.5) {
                 return message.reply(truth());
             } else {
                 return message.reply(dare());
             }
         } else if (normalized.includes('truth')) {
+            await type(message);
             return message.reply(truth());
         } else if (normalized.includes('dare')) {
+            await type(message);
             return message.reply(dare());
         }
     }
