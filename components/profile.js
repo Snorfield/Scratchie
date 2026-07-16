@@ -12,18 +12,27 @@ const escape = require('../functions/escape');
 
 /**
  * Build component with user information
- * @param {object} information 
+ * @param {object} information
  * @returns {object}
  */
 
 function profile(information) {
-    const body = [
-        new TextDisplayBuilder().setContent(`# ${escape(information.username)}`)
-    ]
+    const rawDate = `${information.history.joined}`;
+    const date = new Date(rawDate);
+    const currentYear = new Date().getFullYear();
+    const formattedDate = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    let body = [
+        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}\n*${information.id} · ${formattedDate} · ${information.profile.country}*`)
+    ];
 
     if (information.profile.bio.length > 0) {
         body.push(
-            new TextDisplayBuilder().setContent(`*${information.id} | ${information.profile.country}*\n### About me\n${escape(information.profile.bio)}`)
+            new TextDisplayBuilder().setContent(`\n### About me\n${escape(information.profile.bio)}`)
         );
     }
 
@@ -32,27 +41,37 @@ function profile(information) {
             new TextDisplayBuilder().setContent(`### What I'm working on\n${escape(information.profile.status)}`)
         );
     }
+
+    if (information.profile.bio.length === 0 && information.profile.status.length === 0) {
+        body.push(
+            new TextDisplayBuilder().setContent(`This profile has nothing else to display.`)
+        );
+    }
+
     return {
         components: [
             new ContainerBuilder()
-                .setAccentColor(16756224)
-                .addSectionComponents(
-                    new SectionBuilder()
-                        .setThumbnailAccessory(
-                            new ThumbnailBuilder()
-                                .setURL(information.profile.images['60x60'])
-                        )
-                        .addTextDisplayComponents(body)
+            .setAccentColor(16756224)
+            .addSectionComponents(
+                new SectionBuilder()
+                .setThumbnailAccessory(
+                    new ThumbnailBuilder()
+                    .setURL(information.profile.images['60x60'])
                 )
-                .addActionRowComponents(
-                    new ActionRowBuilder()
-                        .addComponents(
-                            new ButtonBuilder()
-                                .setStyle(ButtonStyle.Link)
-                                .setLabel("Profile")
-                                .setURL(`https://scratch.mit.edu/users/${information.username}/`)
-                        )
+                .addTextDisplayComponents(body)
+            )
+            .addActionRowComponents(
+                new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                    .setStyle(ButtonStyle.Link)
+                    .setLabel("Profile")
+                    .setEmoji({
+                        name: "😺",
+                    })
+                    .setURL(`https://scratch.mit.edu/users/${information.username}/`)
                 )
+            )
         ],
         flags: MessageFlags.IsComponentsV2
     }
