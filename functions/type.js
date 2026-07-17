@@ -4,7 +4,7 @@
  */
 
 async function type(message) {
-    await message.channel.sendTyping();
+    await message.channel.sendTyping().catch(() => null);
     await new Promise(resolve => setTimeout(resolve, 500 + Math.floor(Math.random() * 1500)));
 }
 
