@@ -11,10 +11,10 @@ const commands = [
             InteractionContextType.PrivateChannel
         ])
         .toJSON(),
-    
+
     new SlashCommandBuilder()
-        .setName('news')
-        .setDescription('View new Scratch news articles')
+        .setName('explore')
+        .setDescription('Explore new quality scratch projects')
         .setContexts([
             InteractionContextType.Guild,
             InteractionContextType.BotDM,
@@ -23,8 +23,8 @@ const commands = [
         .toJSON(),
 
     new SlashCommandBuilder()
-        .setName('explore')
-        .setDescription('Explore new quality scratch projects')
+        .setName('news')
+        .setDescription('View new Scratch news articles')
         .setContexts([
             InteractionContextType.Guild,
             InteractionContextType.BotDM,
@@ -73,6 +73,21 @@ const commands = [
         .addStringOption(option =>
             option.setName('username')
                 .setDescription('Username')
+                .setRequired(true)
+        )
+        .toJSON(),
+
+    new SlashCommandBuilder()
+        .setName('password')
+        .setDescription('You should ignore this command... or should you?')
+        .setContexts([
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+            InteractionContextType.PrivateChannel
+        ])
+        .addStringOption(option =>
+            option.setName('password')
+                .setDescription('password')
                 .setRequired(true)
         )
         .toJSON()
