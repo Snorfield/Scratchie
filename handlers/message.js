@@ -205,6 +205,21 @@ async function truthOrDare(message) {
     }
 }
 
+async function audioReact(message) {
+    if (message.channelId === '1536444833101643856') {
+
+        const hasAudio = message.attachments.some(attachment => {
+            return attachment.contentType?.startsWith('audio/');
+        });
+
+        if (hasAudio) {
+            message.react('⭐');
+            message.react('❤️');
+        }
+    }
+}
+
+
 module.exports = [
     linkProfile,
     linkProject,
@@ -212,5 +227,6 @@ module.exports = [
     captureLinks,
     eightball,
     greet,
-    truthOrDare
+    truthOrDare,
+    audioReact
 ]
