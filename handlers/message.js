@@ -206,7 +206,7 @@ async function truthOrDare(message) {
 }
 
 async function audioReact(message) {
-    if (message.channelId === '1536444833101643856') {
+    if (message.channelId === '1140996823364943935') {
 
         const hasAudio = message.attachments.some(attachment => {
             return attachment.contentType?.startsWith('audio/');
