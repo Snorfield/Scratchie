@@ -205,20 +205,39 @@ async function truthOrDare(message) {
     }
 }
 
-async function audioReact(message) {
-    if (message.channelId === '1140996823364943935') {
+async function autoReact(message) {
+    if (message.channelId === channels['arts-creations']) {
+        const snapshot = message.messageSnapshots.first();
 
-        const hasAudio = message.attachments.some(attachment => {
-            return attachment.contentType?.startsWith('audio/');
-        });
+        const hasAttachment = (message.attachments.size > 0) || (snapshot?.attachments.size > 0);
 
-        if (hasAudio) {
-            message.react('⭐');
-            message.react('❤️');
+        if (hasAttachment) {
+            message.react('⭐').catch(() => null);
+            message.react('❤️').catch(() => null);
         }
     }
 }
 
+async function captureHelp(message) {
+    if (message.author.id === clientId) return;
+    const content = message.content.toLowerCase();
+
+    const keyphrases = [
+        "get help",
+        "help me",
+        "help with",
+        "i need help"
+    ];
+
+    if (keyphrases.some(phrase =>
+        content.includes(phrase)
+    )) {
+        message.reply(components.container(
+            `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help!`,
+            16756224
+        ));
+    }
+}
 
 module.exports = [
     linkProfile,
@@ -228,5 +247,6 @@ module.exports = [
     eightball,
     greet,
     truthOrDare,
-    audioReact
+    autoReact,
+    captureHelp
 ]
