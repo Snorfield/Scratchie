@@ -1,5 +1,5 @@
-const { Client, Events, GatewayIntentBits, ChannelType } = require('discord.js');
-const { token } = require('./config.json');
+const { Client, Events, GatewayIntentBits, ChannelType, WebhookClient, AuditLogEvent } = require('discord.js');
+const { token, loggingWebhook } = require('./config.json');
 const commands = require('./commands/export');
 const components = require('./components/export');
 const statuses = require('./data/status.json');
@@ -13,7 +13,33 @@ const client = new Client({
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildModeration
 	],
+});
+
+const logSystem = new WebhookClient({
+	url: loggingWebhook
+});
+
+client.on(Events.GuildBanAdd, async ban => {
+	try {
+		const logs = await ban.guild.fetchAuditLogs({
+			type: AuditLogEvent.MemberBanAdd,
+			limit: 5
+		})
+
+		const entry = logs.entries.find(
+			entry => entry.target?.id === ban.user.id
+		);
+
+		const reason = entry?.reason ?? 'No reason provided';
+		await logSystem.send({
+			username: 'Scratchie',
+			content: `<@${ban.user.id}> (${ban.user.username} - ${ban.user.id}) was banned for reason:\n\`${reason}\``
+		});
+	} catch (error) {
+		console.error(error);
+	}
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -44,7 +70,7 @@ client.on(Events.ThreadCreate, (thread, created) => {
 	}
 });
 
-client.once(Events.ClientReady, async (readyClient) => {
+client.once(Events.ClientReady, (readyClient) => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 
 
