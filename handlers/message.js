@@ -1,7 +1,8 @@
 const get = require('../functions/fetch');
 const components = require('../components/export');
 const channels = require('../data/channels.json');
-const answers = require('../data/eightball.json');
+const eightballAnswers = require('../data/eightball.json');
+const doesbroAnswers = require('../data/doesbro.json');
 const { clientId } = require('../config.json');
 const normalize = require('../functions/normalize');
 const crypto = require('crypto');
@@ -142,12 +143,55 @@ async function eightball(message) {
             const hash = crypto.createHash('sha256').update(semanticize(toHash)).digest();
             await type(message);
             return message.reply(
-                answers[hash.readUInt32BE(0) % answers.length]
+                eightballAnswers[hash.readUInt32BE(0) % eightballAnswers.length]
             );
         } else {
             await type(message);
             return message.reply(
-                answers[Math.floor(Math.random() * answers.length)]
+                eightballAnswers[Math.floor(Math.random() * eightballAnswers.length)]
+            );
+        }
+    }
+}
+
+async function doesbro(message) {
+    if (message.author.id === clientId) return;
+    const content = message.content.toLowerCase();
+    const normalized = normalize(message.content);
+    const keywords = [
+        "you",
+        "did",
+        "do",
+        "does",
+        "doesn't"
+    ];
+
+    if (
+        (message.mentions.users.has(clientId) || content.includes('scratchie')) &&
+        keywords.some(word =>
+            content.includes(word)
+        )
+    ) {
+        let toHash = normalized;
+
+        if (message.reference?.messageId) {
+            const reply = await message.fetchReference().catch(() => null);
+
+            if (reply) {
+                toHash = `${normalize(reply.content)} ${normalized}`;
+            }
+        }
+
+        if (semanticize(toHash).split(' ').length > 2 || message.reference?.messageId) {
+            const hash = crypto.createHash('sha256').update(semanticize(toHash)).digest();
+            await type(message);
+            return message.reply(
+                doesbroAnswers[hash.readUInt32BE(0) % doesbroAnswers.length]
+            );
+        } else {
+            await type(message);
+            return message.reply(
+                doesbroAnswers[Math.floor(Math.random() * doesbroAnswers.length)]
             );
         }
     }
@@ -245,6 +289,7 @@ module.exports = [
     linkStudio,
     captureLinks,
     eightball,
+    doesbro,
     greet,
     truthOrDare,
     autoReact,
