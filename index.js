@@ -1,5 +1,5 @@
 const { Client, Events, GatewayIntentBits, ChannelType, WebhookClient, AuditLogEvent } = require('discord.js');
-const { token, loggingWebhook } = require('./config.json');
+const { token, loggingWebhook, statusUpdate } = require('./config.json');
 const commands = require('./commands/export');
 const components = require('./components/export');
 const statuses = require('./data/status.json');
@@ -73,15 +73,21 @@ client.on(Events.ThreadCreate, (thread, created) => {
 client.once(Events.ClientReady, (readyClient) => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 
-
-	/* TODO
-	Make statuses rotate every so often. Low priority 
-	*/
-	const status = statuses[Math.floor(Math.random() * statuses.length)];
+	const randomStatus = () => {
+		const status = statuses[Math.floor(Math.random() * statuses.length)];
+		return [{ name: status.content, type: status.type }];
+	}
 	client.user.setPresence({
-		activities: [{ name: status.content, type: status.type }],
+		activities: randomStatus(),
 		status: 'online',
 	});
+
+	setInterval(() => {
+		client.user.setPresence({
+			activities: randomStatus(),
+			status: 'online',
+		});
+	}, 60000 * statusUpdate)
 });
 
 client.login(token);

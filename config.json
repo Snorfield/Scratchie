@@ -2,5 +2,6 @@
     "token":  "",
     "clientId": "",
     "guildId": "",
-    "loggingWebhook": ""
+    "loggingWebhook": "",
+    "statusUpdate": 10
 }
