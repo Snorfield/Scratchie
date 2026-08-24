@@ -2,7 +2,7 @@ const get = require('../functions/fetch');
 const components = require('../components/export');
 const channels = require('../data/channels.json');
 const eightballAnswers = require('../data/eightball.json');
-const doesbroAnswers = require('../data/doesbro.json');
+const doesBroAnswers = require('../data/doesBro.json');
 const { clientId } = require('../config.json');
 const normalize = require('../functions/normalize');
 const crypto = require('crypto');
@@ -154,7 +154,7 @@ async function eightball(message) {
     }
 }
 
-async function doesbro(message) {
+async function doesBro(message) {
     if (message.author.id === clientId) return;
     const content = message.content.toLowerCase();
     const normalized = normalize(message.content);
@@ -186,12 +186,12 @@ async function doesbro(message) {
             const hash = crypto.createHash('sha256').update(semanticize(toHash)).digest();
             await type(message);
             return message.reply(
-                doesbroAnswers[hash.readUInt32BE(0) % doesbroAnswers.length]
+                doesbroAnswers[hash.readUInt32BE(0) % doesBroAnswers.length]
             );
         } else {
             await type(message);
             return message.reply(
-                doesbroAnswers[Math.floor(Math.random() * doesbroAnswers.length)]
+                doesbroAnswers[Math.floor(Math.random() * doesBroAnswers.length)]
             );
         }
     }
@@ -289,7 +289,7 @@ module.exports = [
     linkStudio,
     captureLinks,
     eightball,
-    doesbro,
+    doesBro,
     greet,
     truthOrDare,
     autoReact,
