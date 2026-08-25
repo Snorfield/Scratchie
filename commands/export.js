@@ -5,6 +5,7 @@ const studio = require('./studio');
 const explore = require('./explore');
 const news = require('./news');
 const password = require('./password');
+const checkUsername = require('./checkUsername');
 
 module.exports = {
     ping,
@@ -13,5 +14,6 @@ module.exports = {
     studio,
     explore,
     news,
-    password
+    password,
+    checkUsername
 }

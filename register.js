@@ -91,6 +91,21 @@ const commands = [
                 .setRequired(true)
         )
         .toJSON()
+
+    new SlashCommandBuilder()
+        .setName('checkusername')
+        .setDescription('Check if a username exists on Scratch.')
+        .setContexts([
+            InteractionContextType.Guild,
+            InteractionContextType.BotDM,
+            InteractionContextType.PrivateChannel
+        ])
+        .addStringOption(option =>
+            option.setName('username')
+                .setDescription('Username')
+                .setRequired(true)
+        )
+        .toJSON()
 ];
 
 const rest = new REST({ version: '10' }).setToken(token);
