@@ -74,6 +74,13 @@ function project(information) {
                                     name: "🍡",
                                 })
                                 .setURL(`https://turbowarp.org/${information.id}/`),
+                            new ButtonBuilder()
+                                .setStyle(ButtonStyle.Link)
+                                .setLabel("NitroBolt")
+                                .setEmoji({
+                                    name: "⚡",
+                                })
+                                .setURL(`https://nitrobolt.org/#${information.id}/`),
                         )
                 )
         ],
