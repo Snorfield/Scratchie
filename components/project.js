@@ -21,7 +21,7 @@ const emojis = require('../data/emojis.json');
 function project(information) {
     const body = [
         new TextDisplayBuilder().setContent(
-            `# ${escape(information.title)}\n-# By @[${information.author.username}](https://scratch.mit.edu/users/${information.author.username})\n`
+            `# ${escape(information.title)}\n-# By [@${information.author.username}](https://scratch.mit.edu/users/${information.author.username})\n`
         )
     ]
 
