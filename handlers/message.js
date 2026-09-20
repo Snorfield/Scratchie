@@ -1,7 +1,8 @@
 const get = require('../functions/fetch');
 const components = require('../components/export');
 const channels = require('../data/channels.json');
-const answers = require('../data/eightball.json');
+const eightballAnswers = require('../data/eightball.json');
+const doesBroAnswers = require('../data/doesbro.json');
 const { clientId } = require('../config.json');
 const normalize = require('../functions/normalize');
 const crypto = require('crypto');
@@ -142,14 +143,52 @@ async function eightball(message) {
             const hash = crypto.createHash('sha256').update(semanticize(toHash)).digest();
             await type(message);
             return message.reply(
-                answers[hash.readUInt32BE(0) % answers.length]
+                eightballAnswers[hash.readUInt32BE(0) % eightballAnswers.length]
             );
         } else {
             await type(message);
             return message.reply(
-                answers[Math.floor(Math.random() * answers.length)]
+                eightballAnswers[Math.floor(Math.random() * eightballAnswers.length)]
             );
         }
+    }
+}
+
+async function doesBro(message) {
+    if (message.author.id === clientId) return;
+    const content = message.content.toLowerCase();
+    const normalized = normalize(message.content);
+    const keywords = [
+        "you",
+        "did",
+        "do",
+        "does",
+        "doesn't"
+    ];
+
+    if (
+        (message.mentions.users.has(clientId) || content.includes('scratchie')) &&
+        keywords.some(word =>
+            content.includes(word)
+        )
+    ) {
+        let semanticized = normalized;
+
+        if (message.reference?.messageId) {
+            const reply = await message.fetchReference().catch(() => null);
+
+            if (reply) {
+                semanticized = `${normalize(reply.content)} ${normalized}`;
+            }
+        }
+
+        semanticized = semanticize(semanticized);
+        const seed = [...semanticized].reduce((total, char) => total + char.codePointAt(0), 0);
+        const replyOption = doesBroAnswers[seed % doesBroAnswers.length];
+
+        return message.reply({
+            content: replyOption
+        });
     }
 }
 
@@ -245,6 +284,7 @@ module.exports = [
     linkStudio,
     captureLinks,
     eightball,
+    doesBro,
     greet,
     truthOrDare,
     autoReact,
