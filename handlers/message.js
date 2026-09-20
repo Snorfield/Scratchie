@@ -2,7 +2,7 @@ const get = require('../functions/fetch');
 const components = require('../components/export');
 const channels = require('../data/channels.json');
 const eightballAnswers = require('../data/eightball.json');
-const doesBroAnswers = require('../data/doesBro.json');
+const doesBroAnswers = require('../data/doesbro.json');
 const { clientId } = require('../config.json');
 const normalize = require('../functions/normalize');
 const crypto = require('crypto');
@@ -172,28 +172,23 @@ async function doesBro(message) {
             content.includes(word)
         )
     ) {
-        let toHash = normalized;
+        let semanticized = normalized;
 
         if (message.reference?.messageId) {
             const reply = await message.fetchReference().catch(() => null);
 
             if (reply) {
-                toHash = `${normalize(reply.content)} ${normalized}`;
+                semanticized = `${normalize(reply.content)} ${normalized}`;
             }
         }
 
-        if (semanticize(toHash).split(' ').length > 2 || message.reference?.messageId) {
-            const hash = crypto.createHash('sha256').update(semanticize(toHash)).digest();
-            await type(message);
-            return message.reply(
-                doesbroAnswers[hash.readUInt32BE(0) % doesBroAnswers.length]
-            );
-        } else {
-            await type(message);
-            return message.reply(
-                doesbroAnswers[Math.floor(Math.random() * doesBroAnswers.length)]
-            );
-        }
+        semanticized = semanticize(semanticized);
+        const seed = [...semanticized].reduce((total, char) => total + char.codePointAt(0), 0);
+        const replyOption = doesBroAnswers[seed % doesBroAnswers.length];
+
+        return message.reply({
+            content: replyOption
+        });
     }
 }
 
