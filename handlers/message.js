@@ -12,10 +12,13 @@ const type = require('../functions/type.js');
 
 const reactions = [
     { regex: /penguinmod/i, emoji: '🐧' },
-    { regex: /scratch/i, emoji: '🐱' },
+    { regex: /scratch/i, emoji: '1216005306090393680' },
     { regex: /nitrobolt/i, emoji: '⚡' },
     { regex: /turbowarp/i, emoji: '🍡' },
-    { regex: /\b(hi|hello|hiya)\b/i, emoji: '👋' }
+    { regex: /\b(hi|hello|hiya|hej|sup|hey)\b/i, emoji: '1359604048801829114' },
+    { regex: /griffpatch/i, emoji: '1499096420144386239' },
+    { regex: /gobo/i, emoji: '1465845363326976343' },
+    { regex: /giga/i, emoji: '1465845449524252703' },
 ];
 
 /**
