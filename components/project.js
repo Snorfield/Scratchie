@@ -21,7 +21,7 @@ const emojis = require('../data/emojis.json');
 function project(information) {
     const body = [
         new TextDisplayBuilder().setContent(
-            `# ${escape(information.title)}\n-# By [${information.author.username}](https://scratch.mit.edu/users/${information.author.username})\n`
+            `# ${escape(information.title)}\n-# By [@${information.author.username}](https://scratch.mit.edu/users/${information.author.username})\n`
         )
     ]
 
@@ -74,6 +74,13 @@ function project(information) {
                                     name: "🍡",
                                 })
                                 .setURL(`https://turbowarp.org/${information.id}/`),
+                            new ButtonBuilder()
+                                .setStyle(ButtonStyle.Link)
+                                .setLabel("NitroBolt")
+                                .setEmoji({
+                                    name: "⚡",
+                                })
+                                .setURL(`https://nitrobolt.org/#${information.id}/`),
                         )
                 )
         ],
