@@ -14,7 +14,6 @@ const reactions = [
     { regex: /penguinmod/i, emoji: '🐧' },
     { regex: /scratch/i, emoji: '1216005306090393680' },
     { regex: /nitrobolt/i, emoji: '⚡' },
-    { regex: /tuggah/i, emoji: '⚔️' },
     { regex: /turbowarp/i, emoji: '🍡' },
     { regex: /\b(hi|hello|hiya|hej|sup|hey)\b/i, emoji: '1359604048801829114' },
     { regex: /griffpatch/i, emoji: '1499096420144386239' },
