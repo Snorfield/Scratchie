@@ -258,13 +258,19 @@ async function captureServerAdvert(message) {
     const content = message.content.toLowerCase();
 
     const serverAdvertLink = /https:\/\/discord\.gg\/[a-zA-Z0-9-]+/g;
-    
-    if (serverAdvertLink.test(message.content)) {
+    const discordComAdvertLink = /https:\/\/discord\.com\/invite\/[a-zA-Z0-9-]+/g;
+
+
+    if (serverAdvertLink.test(message.content) || discordComAdvertLink.test(message.content)) {
         message.reply(components.container(
             `‼️Hey <@${message.author.id}>, ensure you keep all server advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939⁠ please!
             **Continuing to do so will result in a ban**.`,
             16756224
         ));
+
+        setTimeout(async () => {
+            await message.delete().catch(() => null);
+        }, 1000);
     }
 }
 
