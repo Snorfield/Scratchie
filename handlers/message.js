@@ -257,9 +257,8 @@ async function captureServerAdvert(message) {
     if (message.author.id === clientId) return;
     const content = message.content.toLowerCase();
 
-    const serverAdvertLink = /https:\/\/discord\.gg\/[a-zA-Z0-9-]+/g;
-    const discordComAdvertLink = /https:\/\/discord\.com\/invite\/[a-zA-Z0-9-]+/g;
-
+    const serverAdvertLink = /(?:https?:\/\/)?discord\.gg\/[a-zA-Z0-9-]+/g;
+    const discordComAdvertLink = /(?:https?:\/\/)?discord\.com\/invite\/[a-zA-Z0-9-]+/g;
 
     if (serverAdvertLink.test(message.content) || discordComAdvertLink.test(message.content)) {
         message.reply(components.container(
