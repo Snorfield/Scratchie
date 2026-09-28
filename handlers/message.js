@@ -257,8 +257,8 @@ async function captureServerAdvert(message) {
     if (message.author.id === clientId) return;
     const content = message.content.toLowerCase();
 
-    const serverAdvertLink = https:\/\/discord\.gg\/[a-zA-Z0-9-]+;
-
+    const serverAdvertLink = /https:\/\/discord\.gg\/[a-zA-Z0-9-]+/g;
+    
     if (serverAdvertLink.test(message.content)) {
         message.reply(components.container(
             `‼️Hey <@${message.author.id}>, ensure you keep all server advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939⁠ please!
