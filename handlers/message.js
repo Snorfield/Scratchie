@@ -255,11 +255,10 @@ async function captureHelp(message) {
 
 async function captureServerAdvert(message) {
     if (message.author.id === clientId) return;
-    const content = message.content.toLowerCase();
 
-    const serverAdvertLink = /(?:https?:\/\/)?discord\.gg\/[a-zA-Z0-9-]+/g;
-    const discordComAdvertLink = /(?:https?:\/\/)?discord\.com\/invite\/[a-zA-Z0-9-]+/g;
-
+    const serverAdvertLink = /(?:https?:\/\/)?discord\.gg\/[a-zA-Z0-9-]+/i;
+    const discordComAdvertLink = /(?:https?:\/\/)?discord\.com\/invite\/[a-zA-Z0-9-]+/i;
+    
     if (serverAdvertLink.test(message.content) || discordComAdvertLink.test(message.content)) {
         message.reply(components.container(
             `‼️Hey <@${message.author.id}>, ensure you keep all server advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939⁠ please!
