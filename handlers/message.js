@@ -253,6 +253,21 @@ async function captureHelp(message) {
     }
 }
 
+async function captureServerAdvert(message) {
+    if (message.author.id === clientId) return;
+    const content = message.content.toLowerCase();
+
+    const serverAdvertLink = https:\/\/discord\.gg\/[a-zA-Z0-9-]+;
+
+    if (serverAdvertLink.test(message.content)) {
+        message.reply(components.container(
+            `‼️Hey <@${message.author.id}>, ensure you keep all server advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939⁠ please!
+            **Continuing to do so will result in a ban**.`,
+            16756224
+        ));
+    }
+}
+
 module.exports = [
     linkProfile,
     linkProject,
@@ -262,5 +277,6 @@ module.exports = [
     greet,
     truthOrDare,
     autoReact,
-    captureHelp
+    captureHelp,
+    captureServerAdvert
 ]
