@@ -23,7 +23,7 @@ const reactions = [
     { regex: /nano/i, emoji: '1465845395753271316' },
     { regex: /rayne/i, emoji: '🌧️' },
     { regex: /john/i, emoji: '🐱' },
-    { regex: /blu/i, emoji: '🔵' },
+    { regex: /\bblu\b/i, emoji: '🔵' },
     { regex: /mov|man o valor|man-o-valor/i, emoji: '🚂' }
 ];
 
