@@ -254,6 +254,11 @@ async function captureHelp(message) {
     }
 }
 
+/**
+ * Capture Discord server links to warn the user not to advertise
+ * @param {object} message 
+ */
+
 async function antiAdvertise(message) {
     if (message.author.id === clientId) return;
     if (message.channel.id === '1140996823364943939') return;
