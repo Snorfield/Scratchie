@@ -20,7 +20,8 @@ const reactions = [
     { regex: /gobo/i, emoji: '1465845363326976343' },
     { regex: /giga/i, emoji: '1465845449524252703' },
     { regex: /tera/i, emoji: '1465845334126100695' },
-    { regex: /nano/i, emoji: '1465845395753271316' }
+    { regex: /nano/i, emoji: '1465845395753271316' },
+    { regex: /rayne/i, emoji: '🌧️' }
 ];
 
 /**
