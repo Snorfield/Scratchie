@@ -21,7 +21,8 @@ const reactions = [
     { regex: /giga/i, emoji: '1465845449524252703' },
     { regex: /tera/i, emoji: '1465845334126100695' },
     { regex: /nano/i, emoji: '1465845395753271316' },
-    { regex: /rayne/i, emoji: '🌧️' }
+    { regex: /rayne/i, emoji: '🌧️' },
+    { regex: /john/i, emoji: '🐱' }
 ];
 
 /**
