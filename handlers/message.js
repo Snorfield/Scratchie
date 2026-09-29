@@ -256,12 +256,13 @@ async function captureHelp(message) {
 async function captureServerAdvert(message) {
     if (message.author.id === clientId) return;
 
-    const serverAdvertLink = /(?:https?:\/\/)?discord\.gg\/[a-zA-Z0-9-]+/i;
-    const discordComAdvertLink = /(?:https?:\/\/)?discord\.com\/invite\/[a-zA-Z0-9-]+/i;
-    
+    const serverAdvertLink = /discord\.gg\/[a-zA-Z0-9-]+/i;
+    const discordComAdvertLink = /discord\.com\/invite\/[a-zA-Z0-9-]+/i;
+
+  if (!message.member.permissions.has(PermissionFlagBits.ModerateMembers)) {
     if (serverAdvertLink.test(message.content) || discordComAdvertLink.test(message.content)) {
         message.reply(components.container(
-            `‼️Hey <@${message.author.id}>, ensure you keep all server advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939⁠ please!\n**Continuing to do so will result in a ban**.`,
+            `‼️Hey <@${message.author.id}>, ensure you keep all server advertisements to https://discord.com/channels/1140996822131802192/1140996823364943939⁠ please!` + "\n**Continuing to do so will result in a ban**.",
             16756224
         ));
 
@@ -269,6 +270,7 @@ async function captureServerAdvert(message) {
             await message.delete().catch(() => null);
         }, 1000);
     }
+  }
 }
 
 module.exports = [
