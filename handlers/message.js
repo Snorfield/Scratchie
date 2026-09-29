@@ -9,35 +9,15 @@ const semanticize = require('../functions/semanticize');
 const challenges = require('../data/challenges.json');
 const randomArrayInt = require('../functions/random');
 const type = require('../functions/type.js');
-const emojis = require('../data/emojis.json');
+const { PermissionFlagsBits } = require('discord.js');
 
-const reactionHandlers = [
-    (message) => {
-        if (message.content.toLowerCase().includes('penguinmod')) {
-            return message.react('🐧').catch(() => null);
-        }
-    },
-    (message) => {
-        if (message.content.toLowerCase().includes('scratch')) {
-            return message.react('1216005306090393680').catch(() => null);
-        }
-    },
-    (message) => {
-        if (message.content.toLowerCase().includes('nitrobolt')) {
-            return message.react('⚡').catch(() => null);
-        }
-    },
-    (message) => {
-        if (message.content.toLowerCase().includes('turbowarp')) {
-            return message.react('🍡').catch(() => null);
-        }
-    },
-    (message) => {
-        if (/\b(hi|hello|hiya|hej|sup|hey)\b/i.test(message.content.toLowerCase())) {
-            return message.react('1359604048801829114').catch(() => null);
-        }
-    }
-]
+const reactions = [
+    { regex: /penguinmod/i, emoji: '🐧' },
+    { regex: /scratch/i, emoji: '🐱' },
+    { regex: /nitrobolt/i, emoji: '⚡' },
+    { regex: /turbowarp/i, emoji: '🍡' },
+    { regex: /\b(hi|hello|hiya)\b/i, emoji: '👋' }
+];
 
 /**
  * Capture Scratch profile links and send a preview of them
@@ -246,8 +226,10 @@ async function autoReact(message) {
         }
     }
 
-    for (const handler of reactionHandlers) {
-        handler(message);
+    for (const reaction of reactions) {
+        if (reaction.regex.test(message.content.toLowerCase())) {
+            message.react(reaction.emoji).catch(() => null);
+        }
     }
 }
 
@@ -272,6 +254,23 @@ async function captureHelp(message) {
     }
 }
 
+async function antiAdvertise(message) {
+    if (message.author.id === clientId) return;
+    if (message.channel.id === '1140996823364943939') return;
+    if (message.member.permissions.has(PermissionFlagsBits.ModerateMembers)) return;
+
+    if (/discord.com\/invite\/[a-zA-Z0-9-]+/i.test(message.content) || /discord.gg\/[a-zA-Z0-9-]+/i.test(message.content)) {
+        message.reply(components.container(
+            `‼️ Hey <@${message.author.id}>, server advertisements aren't allowed here. Please move to https://discord.com/channels/1140996822131802192/1140996823364943939 if you wish to advertise.`,
+            16756224
+        ));
+
+        setTimeout(() => {
+            message.delete().catch(() => null);
+        }, 1000);
+    }
+}
+
 module.exports = [
     linkProfile,
     linkProject,
@@ -281,5 +280,6 @@ module.exports = [
     greet,
     truthOrDare,
     autoReact,
-    captureHelp
+    captureHelp,
+    antiAdvertise
 ]
