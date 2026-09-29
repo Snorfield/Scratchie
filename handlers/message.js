@@ -15,9 +15,12 @@ const reactions = [
     { regex: /scratch/i, emoji: '1216005306090393680' },
     { regex: /nitrobolt/i, emoji: '⚡' },
     { regex: /turbowarp/i, emoji: '🍡' },
-    { regex: /\b(hi|hello|hiya|hej|sup|hey)\b/i, emoji: '1359604048801829114' },
+    { regex: /\b(hi|hello|hiya|sup|hey)\b/i, emoji: '1359604048801829114' },
     { regex: /gobo/i, emoji: '1465845363326976343' },
     { regex: /giga/i, emoji: '1465845449524252703' },
+    { regex: /dot/i, emoji: '1482494301199139158' },
+    { regex: /tera/i, emoji: '1465845334126100695' },
+    { regex: /nano/i, emoji: '1465845395753271316' },
 ];
 
 /**
