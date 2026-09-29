@@ -9,6 +9,7 @@ const semanticize = require('../functions/semanticize');
 const challenges = require('../data/challenges.json');
 const randomArrayInt = require('../functions/random');
 const type = require('../functions/type.js');
+const { PermissionFlagsBits } = require('discord.js');
 
 const reactions = [
     { regex: /penguinmod/i, emoji: '🐧' },
@@ -228,7 +229,7 @@ async function autoReact(message) {
     for (const reaction of reactions) {
         if (reaction.regex.test(message.content.toLowerCase())) {
             message.react(reaction.emoji).catch(() => null);
-        } 
+        }
     }
 }
 
@@ -253,6 +254,23 @@ async function captureHelp(message) {
     }
 }
 
+async function antiAdvertise(message) {
+    if (message.author.id === clientId) return;
+    if (message.channel.id === '1140996823364943939') return;
+    if (message.member.permissions.has(PermissionFlagsBits.ModerateMembers)) return;
+
+    if (/discord.com\/invite\/[a-zA-Z0-9-]+/i.test(message.content) || /discord.gg\/[a-zA-Z0-9-]+/i.test(message.content)) {
+        message.reply(components.container(
+            `‼️ Hey <@${message.author.id}>, server advertisements aren't allowed here. Please move to https://discord.com/channels/1140996822131802192/1140996823364943939 if you wish to advertise.`,
+            16756224
+        ));
+
+        setTimeout(() => {
+            message.delete().catch(() => null);
+        }, 1000);
+    }
+}
+
 module.exports = [
     linkProfile,
     linkProject,
@@ -262,5 +280,6 @@ module.exports = [
     greet,
     truthOrDare,
     autoReact,
-    captureHelp
+    captureHelp,
+    antiAdvertise
 ]
