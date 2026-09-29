@@ -231,6 +231,7 @@ async function autoReact(message) {
         if (hasAttachment) {
             message.react('⭐').catch(() => null);
             message.react('❤️').catch(() => null);
+            message.react('🔥').catch(() => null);
         }
     }
 
@@ -249,7 +250,10 @@ async function captureHelp(message) {
         "get help",
         "help me",
         "help with",
-        "i need help"
+        "i need help",
+        "i need support",
+        "can you guide me",
+        "guide me"
     ];
 
     if (keyphrases.some(phrase =>
