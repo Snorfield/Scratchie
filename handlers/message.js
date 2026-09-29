@@ -24,7 +24,7 @@ const reactions = [
     { regex: /rayne/i, emoji: '🌧️' },
     { regex: /john/i, emoji: '🐱' },
     { regex: /blu/i, emoji: '🔵' },
-    { regex: /mov|man o valor|man-o-valor/i, emoji: '🚂' }
+    { regex: /mov/i, emoji: '🚂' }
 ];
 
 /**
