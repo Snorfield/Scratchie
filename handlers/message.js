@@ -254,7 +254,7 @@ async function captureHelp(message) {
 
     if (keyphrases.some(phrase =>
         content.includes(phrase)
-    )) {
+    ) && message.channel.parentId !== channels['help-channel']) {
         message.reply(components.container(
             `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help!`,
             16756224
