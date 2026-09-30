@@ -119,6 +119,11 @@ function captureLinks(message) {
     }
 }
 
+/**
+ * Capture 8ball questions and reply
+ * @param {object} message 
+ */
+
 async function eightball(message) {
     if (message.author.id === clientId) return;
     const content = message.content.toLowerCase();
@@ -166,6 +171,11 @@ async function eightball(message) {
     }
 }
 
+/**
+ * Capture greetings addressed to the bot and reply
+ * @param {object} message 
+ */
+
 async function greet(message) {
     if (message.author.id === clientId) return;
     const content = message.content.toLowerCase();
@@ -182,6 +192,11 @@ async function greet(message) {
         );
     }
 }
+
+/**
+ * Capture truth or dare requests and respond
+ * @param {object} message 
+ */
 
 async function truthOrDare(message) {
     if (message.author.id === clientId) return;
@@ -218,6 +233,11 @@ async function truthOrDare(message) {
     }
 }
 
+/**
+ * Check messages to see if they are eligible for auto-reactions
+ * @param {object} message 
+ */
+
 async function autoReact(message) {
     if (message.channelId === channels['arts-creations']) {
         const snapshot = message.messageSnapshots.first();
@@ -237,8 +257,15 @@ async function autoReact(message) {
     }
 }
 
+/**
+ * Capture requests for help and direct users to the proper channel
+ * @param {object} message 
+ */
+
 async function captureHelp(message) {
     if (message.author.id === clientId) return;
+    if (message.channel.parentId === channels['help-channel']) return; 
+
     const content = message.content.toLowerCase();
 
     const keyphrases = [
@@ -248,9 +275,7 @@ async function captureHelp(message) {
         "i need help"
     ];
 
-    if (keyphrases.some(phrase =>
-        content.includes(phrase)
-    )) {
+    if (keyphrases.some(phrase => content.includes(phrase) )) {
         message.reply(components.container(
             `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help!`,
             16756224
