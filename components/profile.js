@@ -26,7 +26,7 @@ function profile(information) {
     });
 
     const body = [
-        new TextDisplayBuilder().setContent(`# ${escape(information.username)} ${countries[information.profile.country]}\n*${information.id} - ${information.profile.country} - ${date}*\n`)
+        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''} ${countries[information.profile.country]}\n*${information.id} - ${information.profile.country} - ${date}*\n`)
     ]
 
     if (information.profile.bio.length > 0) {
