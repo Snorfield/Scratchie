@@ -45,8 +45,8 @@ function profile(information) {
         body.push (
             new TextDisplayBuilder().setContent("This profile has nothing else to display.")
         );
-
     };
+    
     return {
         components: [
             new ContainerBuilder()
