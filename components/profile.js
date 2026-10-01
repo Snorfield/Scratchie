@@ -31,7 +31,7 @@ function profile(information) {
 
     if (information.profile.bio.length > 0) {
         body.push(
-            new TextDisplayBuilder().setContent(`\n## About me\n${formatMentions(escape(information.profile.bio))}`)
+            new TextDisplayBuilder().setContent(`## About me\n${formatMentions(escape(information.profile.bio))}`)
         );
     }
 
