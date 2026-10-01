@@ -25,7 +25,7 @@ function profile(information) {
     });
 
     let body = [
-        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}\n*${information.id} · ${date} · ${information.profile.country}*`)
+        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}\nID: *${information.id} · ${date} · ${information.scratchteam ? 'Scratch Team' : 'Scratcher'} · ${information.profile.country}*`)
     ];
 
     if (information.profile.bio.length > 0) {
