@@ -40,27 +40,41 @@ function profile(information) {
             new TextDisplayBuilder().setContent(`## What I'm working on\n${formatMentions(escape(information.profile.status))}`)
         );
     }
-    return {
+
+      return {
         components: [
             new ContainerBuilder()
-                .setAccentColor(16756224)
-                .addSectionComponents(
-                    new SectionBuilder()
-                        .setThumbnailAccessory(
-                            new ThumbnailBuilder()
-                                .setURL(information.profile.images['60x60'])
-                        )
-                        .addTextDisplayComponents(body)
+            .setAccentColor(16756224)
+            .addSectionComponents(
+                new SectionBuilder()
+                .setThumbnailAccessory(
+                    new ThumbnailBuilder()
+                    .setURL(information.profile.images['60x60'])
                 )
-                .addActionRowComponents(
-                    new ActionRowBuilder()
-                        .addComponents(
+                .addTextDisplayComponents(body)
+            )
+            .addActionRowComponents(
+                new ActionRowBuilder().addComponents(
+                    new ButtonBuilder()
+                    .setStyle(ButtonStyle.Link)
+                    .setLabel("Profile")
+                    .setEmoji({
+                        name: "👤",
+                    })
+                    .setURL(`https://scratch.mit.edu/users/${information.username}/`),
+                    ...(featured.featured_project !== null
+                        ? [
                             new ButtonBuilder()
-                                .setStyle(ButtonStyle.Link)
-                                .setLabel("Profile")
-                                .setURL(`https://scratch.mit.edu/users/${information.username}/`)
-                        )
+                            .setStyle(ButtonStyle.Link)
+                            .setLabel(featured.featured_project_label_name)
+                            .setEmoji({
+                                name: "📜",
+                            })
+                            .setURL(`https://scratch.mit.edu/projects/${featured.featured_project}/`)
+                        ]
+                        : [])
                 )
+            )
         ],
         flags: MessageFlags.IsComponentsV2
     }
