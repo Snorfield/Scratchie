@@ -42,7 +42,7 @@ function profile(information) {
     }
 
     if (information.profile.status.length === 0 && information.profile.bio.length === 0) {
-        body.push (
+        body.push(
             new TextDisplayBuilder().setContent("This profile has nothing else to display.")
         );
     };
