@@ -6,9 +6,7 @@ const {
     ButtonStyle,
     ActionRowBuilder,
     ContainerBuilder,
-    MessageFlags,
-    SeparatorBuilder,
-    SeparatorSpacingSize
+    MessageFlags
 } = require('discord.js');
 const escape = require('../functions/escape');
 const countries = require('../data/countries.json');
