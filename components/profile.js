@@ -26,12 +26,12 @@ function profile(information) {
     });
 
     const body = [
-        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? "*" : ""} ${countries[information.profile.country]}`)
+        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? "*" : ""} ${countries[information.profile.country]}\n*${information.id} - ${information.profile.country} - ${date}*`)
     ]
 
     if (information.profile.bio.length > 0) {
         body.push(
-            new TextDisplayBuilder().setContent(`*${information.id} - ${information.profile.country} - ${date}*\n## About me\n${formatMentions(escape(information.profile.bio))}`)
+            new TextDisplayBuilder().setContent(`\n## About me\n${formatMentions(escape(information.profile.bio))}`)
         );
     }
 
@@ -40,6 +40,13 @@ function profile(information) {
             new TextDisplayBuilder().setContent(`## What I'm working on\n${formatMentions(escape(information.profile.status))}`)
         );
     }
+
+    if (information.profile.status.length === 0 && information.profile.bio.length === 0) {
+        body.push (
+            new TextDisplayBuilder().setContent("This profile has nothing else to display.")
+        );
+
+    };
     return {
         components: [
             new ContainerBuilder()
