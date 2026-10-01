@@ -15,10 +15,11 @@ const formatMentions = require('../functions/mentions');
 /**
  * Build component with user information
  * @param {object} information 
+ * @param {object} featured 
  * @returns {object}
  */
 
-function profile(information) {
+function profile(information, featured) {
     const date = new Date(information.history.joined).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
