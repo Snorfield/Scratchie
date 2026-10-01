@@ -7,9 +7,10 @@ async function profile(interaction) {
     const username = interaction.options.getString('username');
 
     const information = await get(`https://api.scratch.mit.edu/users/${username}`);
+    const featured = await get(`https://scratch.mit.edu/site-api/users/all/${username}/`);
 
     if (information) {
-        return interaction.editReply(components.profile(information));
+        return interaction.editReply(components.profile(information, featured));
     } else {
         return interaction.editReply(components.container(
             "Error while fetching user information",
