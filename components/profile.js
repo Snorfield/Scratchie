@@ -6,9 +6,13 @@ const {
     ButtonStyle,
     ActionRowBuilder,
     ContainerBuilder,
-    MessageFlags
+    MessageFlags,
+    SeparatorBuilder,
+    SeparatorSpacingSize
 } = require('discord.js');
 const escape = require('../functions/escape');
+const countries = require('../data/countries.json');
+const formatMentions = require('../functions/mentions');
 
 /**
  * Build component with user information
@@ -17,19 +21,25 @@ const escape = require('../functions/escape');
  */
 
 function profile(information) {
+    const date = new Date(information.history.joined).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
     const body = [
-        new TextDisplayBuilder().setContent(`# ${escape(information.username)}`)
+        new TextDisplayBuilder().setContent(`# ${escape(information.username)} ${countries[information.profile.country]}`)
     ]
 
     if (information.profile.bio.length > 0) {
         body.push(
-            new TextDisplayBuilder().setContent(`*${information.id} | ${information.profile.country}*\n### About me\n${escape(information.profile.bio)}`)
+            new TextDisplayBuilder().setContent(`*${information.id} - ${information.profile.country} - ${date}*\n## About me\n${formatMentions(escape(information.profile.bio))}`)
         );
     }
 
     if (information.profile.status.length > 0) {
         body.push(
-            new TextDisplayBuilder().setContent(`### What I'm working on\n${escape(information.profile.status)}`)
+            new TextDisplayBuilder().setContent(`## What I'm working on\n${formatMentions(escape(information.profile.status))}`)
         );
     }
     return {
