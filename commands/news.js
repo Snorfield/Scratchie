@@ -51,11 +51,7 @@ async function news(interaction) {
                 }
             );
         }
-
-        if (container.components.at(-1)?.type === 14) {
-            container.components.pop();
-        }
-
+        
         // View all news articles
         container.components.push({
             type: 1,
