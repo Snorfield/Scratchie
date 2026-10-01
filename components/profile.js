@@ -19,7 +19,6 @@ const escape = require('../functions/escape');
 function profile(information) {
     const rawDate = information.history.joined;
     const date = new Date(rawDate);
-    const currentYear = new Date().getFullYear();
     const formattedDate = date.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
