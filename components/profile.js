@@ -18,13 +18,14 @@ const escape = require('../functions/escape');
 
 function profile(information) {
     const rawDate = information.history.joined;
-    const date = new Date(rawDate);
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const month = monthNames[date.getMonth()];
-    const formattedDate = `${month} ${date.getDate()}, ${date.getFullYear()}`;
+    const date = new Date(rawDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
 
     let body = [
-        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}\n*${information.id} · ${formattedDate} · ${information.profile.country}*`)
+        new TextDisplayBuilder().setContent(`# ${escape(information.username)}${information.scratchteam ? '*' : ''}\n*${information.id} · ${date} · ${information.profile.country}*`)
     ];
 
     if (information.profile.bio.length > 0) {
