@@ -18,7 +18,7 @@ const escape = require('../functions/escape');
 
 function profile(information) {
     const rawDate = information.history.joined;
-    const date = new Date();
+    const date = new Date(rawDate);
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const month = monthNames[date.getMonth()];
     const formattedDate = `${month} ${date.getDate()}, ${date.getFullYear()}`;
