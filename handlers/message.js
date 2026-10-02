@@ -13,7 +13,6 @@ const { PermissionFlagsBits } = require('discord.js');
 
 const reactions = [
     { regex: /penguinmod/i, emoji: '🐧' },
-    { regex: /scratch/i, emoji: '1216005306090393680' },
     { regex: /nitrobolt/i, emoji: '⚡' },
     { regex: /turbowarp/i, emoji: '🍡' },
     { regex: /^(hi|hello|hiya|sup|hey)$/i, emoji: '1359604048801829114' },
