@@ -16,7 +16,7 @@ const reactions = [
     { regex: /scratch/i, emoji: '1216005306090393680' },
     { regex: /nitrobolt/i, emoji: '⚡' },
     { regex: /turbowarp/i, emoji: '🍡' },
-    { regex: /\b(hi|hello|hiya|sup|hey)\b/i, emoji: '1359604048801829114' },
+    { regex: /^(hi|hello|hiya|sup|hey)$/i, emoji: '1359604048801829114' },
     { regex: /\bgobo\b/i, emoji: '1465845363326976343' },
     { regex: /\bgiga\b/i, emoji: '1465845449524252703' },
     { regex: /\btera\b/i, emoji: '1465845334126100695' },
