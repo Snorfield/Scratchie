@@ -260,6 +260,31 @@ async function autoReact(message) {
 }
 
 /**
+ * Capture requests for collaboration and direct users to the proper channel
+ * @param {object} message 
+ */
+
+async function captureHelp(message) {
+    if (message.author.id === clientId) return;
+    if (message.channel.parentId === channels['help-channel']) return; 
+
+    const content = message.content.toLowerCase();
+
+    const keyphrases = [
+        "collab with",
+        "i am hiring",
+        "help me with"
+    ];
+
+    if (keyphrases.some(phrase => content.includes(phrase) )) {
+        message.reply(components.container(
+            `👋 Hey <@${message.author.id}>, if you are looking to collaborate with someone, please use https://discord.com/channels/1140996822131802192/1141402927999762462 to get assistance!`,
+,
+        ));
+    }
+}
+
+/**
  * Capture requests for help and direct users to the proper channel
  * @param {object} message 
  */
@@ -279,8 +304,7 @@ async function captureHelp(message) {
 
     if (keyphrases.some(phrase => content.includes(phrase) )) {
         message.reply(components.container(
-            `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help! If you are looking to collaborate with someone, please use https://discord.com/channels/1140996822131802192/1141402927999762462`,
-            16756224
+            `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help!`,
         ));
     }
 }
