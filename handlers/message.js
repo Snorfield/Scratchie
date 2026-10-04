@@ -264,7 +264,7 @@ async function autoReact(message) {
  * @param {object} message 
  */
 
-async function captureHelp(message) {
+async function captureCollab(message) {
     if (message.author.id === clientId) return;
     if (message.channel.parentId === channels['help-channel']) return; 
 
@@ -342,5 +342,6 @@ module.exports = [
     truthOrDare,
     autoReact,
     captureHelp,
-    antiAdvertise
+    antiAdvertise,
+    captureCollab
 ]
