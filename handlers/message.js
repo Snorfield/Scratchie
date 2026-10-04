@@ -279,7 +279,7 @@ async function captureHelp(message) {
 
     if (keyphrases.some(phrase => content.includes(phrase) )) {
         message.reply(components.container(
-            `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help!`,
+            `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help! If you are looking to collaborate with someone, please use https://discord.com/channels/1140996822131802192/1141402927999762462`,
             16756224
         ));
     }
