@@ -260,6 +260,31 @@ async function autoReact(message) {
 }
 
 /**
+ * Capture requests for collaboration and direct users to the proper channel
+ * @param {object} message 
+ */
+
+async function captureCollab(message) {
+    if (message.author.id === clientId) return;
+    if (message.channel.parentId === channels['help-channel']) return; 
+
+    const content = message.content.toLowerCase();
+
+    const keyphrases = [
+        "collab with",
+        "i am hiring",
+        "help me with"
+    ];
+
+    if (keyphrases.some(phrase => content.includes(phrase) )) {
+        message.reply(components.container(
+            `👋 Hey <@${message.author.id}>, if you are looking to collaborate with someone, please use https://discord.com/channels/1140996822131802192/1141402927999762462 to get assistance!`,
+            16756224
+        ));
+    }
+}
+
+/**
  * Capture requests for help and direct users to the proper channel
  * @param {object} message 
  */
@@ -317,5 +342,6 @@ module.exports = [
     truthOrDare,
     autoReact,
     captureHelp,
-    antiAdvertise
+    antiAdvertise,
+    captureCollab
 ]
