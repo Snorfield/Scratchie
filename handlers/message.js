@@ -20,7 +20,7 @@ const reactions = [
     { regex: /\bgiga\b/i, emoji: '1465845449524252703' },
     { regex: /\btera\b/i, emoji: '1465845334126100695' },
     { regex: /\bnano\b/i, emoji: '1465845395753271316' },
-    { regex: /\bmili\b/i, emoji: '1492169394040737982' },
+    { regex: /\bmilli\b/i, emoji: '1492169394040737982' },
     { regex: /\bpico\b/i, emoji: '1465845424421081259' },
     { regex: /\bzepto\b/i, emoji: '1492169432070619216' }
 ];
