@@ -19,9 +19,21 @@ const emojis = require('../data/emojis.json');
  */
 
 function project(information) {
+    const createdDate = new Date(information.history.created).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+     const modifiedDate = new Date(information.history.modified).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    
     const body = [
         new TextDisplayBuilder().setContent(
-            `# ${escape(information.title)}\n-# By [${information.author.username}](https://scratch.mit.edu/users/${information.author.username})\n`
+            `# ${escape(information.title)}\n-# By [${information.author.username}](https://scratch.mit.edu/users/${information.author.username})\n*Created: ${createdDate} - Modified: ${modifiedDate}*\n`
         )
     ]
 
