@@ -26,7 +26,7 @@
             "A breach could result in punishment for your safety and that of the server."
         ],
         "url1":"https://discord.com/channels/1140996822131802192/1140996822903566347/1371242029849514084",
-        "url2":"https://discord.com/channels/1140996822131802192/1371242029849514084",
+        "url2":"https://discord.com/channels/1140996822131802192/1371242029849514084/1486106511884423198",
         "subrules":{
             "1":{
                 "title":"📖 🌍 | RULE 1.01. - \"__ENGLISH OR AMERICAN.__\"",
@@ -51,29 +51,64 @@
             "If you do not respect peoples boundaries, you will not be tolerated."
         ],
         "url1":"https://discord.com/channels/1140996822131802192/1140996822903566347/1371242351980449883",
-        "url2":"https://discord.com/channels/1140996822131802192/1371242351980449883",
+        "url2":"https://discord.com/channels/1140996822131802192/1371242351980449883/1486106708790214656",
         "subrules":{
             "1":{
                 "title":"📖 🫵 | RULE 2.01. - \"CRAP CRITIQUE.\"",
                 "content":[
-                    "It is forbidden for members of the Scratch Community to react negatively to the showcase posts others have made. [...]",
+                    "**It is forbidden for members of the Scratch Community to react negatively to the showcase posts others have made.** [...]",
                     "You ultimately have the right to provide critique on a person's artwork (which, ideally, you should ask for consent beforehand), but make sure you do so in a way that enables the person to build upon and patch their mistakes. All art has mistakes, please don't just highlight them without offering a solution."
                 ],
                 "url":"https://discord.com/channels/1140996822131802192/1371242351980449883/1486165668801024212"
             },
             "2":{
-                "title":"Title goes here",
+                "title":"📖 🖌️ | RULE 2.02. - \"NEGATIVE PAINTING.\"",
                 "content":[
-                    "Content goes here"
+                    "**It is forbidden for members of the Scratch Community to use this place as a tool** [...] **to portray another being in a negative light.** It does not matter whether the person in question is present or not.",
+                    "This applies to Scratch Servers too, please do not rant about the moderators of Turbowarp in our https://discord.com/channels/1140996822131802192/1140996823364943933 [...]",
+                    "[...] it is forbidden to badmouth members of the team directly. You can criticise the Scratch Team as a whole - just please do not let a name become overly targeted. [...]"
                 ],
-                "url":"https://discord.com/channels/1140996822131802192/1371242351980449883/1486165668801024212"
+                "url":"https://discord.com/channels/1140996822131802192/1371242351980449883/1486168415449120839"
             },
             "3":{
-                "title":"Title goes here",
+                "title":"📖 👥 | RULE 2.03. - \"CREATE CLONE OF USER.\"",
                 "content":[
-                    "Content goes here"
+                    "**It is forbidden for members of the Scratch Community to impersonate, pretend, or mimic another user regardless of consent.** This applies to profile picture or username changes to match another person.",
+                    "[...]"
                 ],
-                "url":"https://discord.com/channels/1140996822131802192/1371242351980449883/1486165668801024212"
+                "url":"https://discord.com/channels/1140996822131802192/1371242351980449883/1508867291893207131"
+            }
+        }
+    },
+    "rule3":{
+        "title":"📜 | Rule 3 - Safe For Everyone (SFE)!",
+        "content":[
+            "We will not tolerate [...] NSFW material here. You will be punished for breaching this rule - all content, messages, etc, MUST be 13+ appropriate.",
+            "-# In the context of showcases, any gore or other possibly upsetting material should be spoilered.",
+            "If your message can be interpreted sexually, it will be interpreted sexually, and you will be punished accordingly."
+        ],
+        "url1":"https://discord.com/channels/1140996822131802192/1140996822903566347/1371242539499130911",
+        "url2":"https://discord.com/channels/1140996822131802192/1371242539499130911/1486106906467762228",
+        "subrules":{
+            "1":{
+                "title":"📖 💕 | RULE 3.01. - \"FANTASIES.\"",
+                "content":[
+                    "It is forbidden for any member of the Scratch Community to post - be it gif, text, video, or audio - content that is typically sexual in nature.",
+                    "[...]",
+                    "This rule also includes images that include the \"boykissers\" or \"femboy\" archetypes.",
+                    "[...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371242539499130911/1486119751632552046"
+            },
+            "2":{
+                "title":"📖 🩸 | RULE 3.02. - \"GORE AND GUTS.\"",
+                "content":[
+                    "-# (⚠️) This rule does NOT apply to casual gore material which are entirely, completely prohibited.",
+                    "-# (⚠️) This rule does NOT apply to sexual violence material which is entirely, completely prohibited.",
+                    "It is forbidden for any member of the Scratch Community to post artwork of a graphic nature in https://discord.com/channels/1140996822131802192/1140996823364943935 without spoilers, and ideally a descriptive content warning (But a simple 'TW - BLOOD' would suffice).",
+                    "[...] If you think you may need a Trigger Warning (TW) or Caution Warning (CW), it is best to play it safe and include those in your post, alongside spoiling the artwork. [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371242539499130911/1486155650009661482"
             }
         }
     }
