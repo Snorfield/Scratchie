@@ -15,7 +15,7 @@ function container(title, content, url1, url2, is_subrule) {
                 "components": [
                     {
                         "type": 10,
-                        "content": `### ${title}\n-# *Expansion of Rule ${title[13]}*`
+                        "content": `### ${title}\n-# *Expansion of Rule ${title.match(/(?<=\bRULE\s)(\w+)/)[1]}*`
                     },
                     {
                         "type": 14,
