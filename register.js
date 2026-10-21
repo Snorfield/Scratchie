@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, InteractionContextType, REST, Routes, StringSelectMenuOptionBuilder, StringSelectMenuComponent } = require('discord.js');
+const { SlashCommandBuilder, InteractionContextType, REST, Routes} = require('discord.js');
 const { token, clientId, guildId } = require('./config.json');
 
 const commands = [
