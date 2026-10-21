@@ -12,6 +12,7 @@ const type = require('../functions/type.js');
 const { PermissionFlagsBits } = require('discord.js');
 
 const reactions = [
+    { regex: /halloween/i, emoji: '🎃' },
     { regex: /penguinmod/i, emoji: '🐧' },
     { regex: /nitrobolt/i, emoji: '⚡' },
     { regex: /turbowarp/i, emoji: '🍡' },
