@@ -1,0 +1,201 @@
+{
+    "rule1":{
+        "title":"📜 | Rule 1 - Stay Safe!",
+        "content":[
+            "Don't share personal or sensitive information with anyone [...] **You shall not share other peoples sensitive information, regardless of consent.**",
+            "Additionally, **You will not discuss or debate sensitive topics such as religions or politics.** [...]",
+            "We also require **ALL MESSAGES TO BE IN ENGLISH.**",
+            "A breach could result in punishment for your safety and that of the server."
+        ],
+        "url1":"https://discord.com/channels/1140996822131802192/1140996822903566347/1371242029849514084",
+        "url2":"https://discord.com/channels/1140996822131802192/1371242029849514084/1486106511884423198",
+        "subrules":{
+            "1":{
+                "title":"📖 🌍 | RULE 1.01. - \"__ENGLISH OR AMERICAN.__\"",
+                "content":[
+                    "**It is discouraged for members of the Scratch Community to send messages in other language.**",
+
+                    "**Examples include:**",
+                    "Long messages in a foreign language, regardless of if whomever present understands it or not. \n[...]",
+
+                    "🌐 | If you seek other language servers, do check out the regional scratch servers available."
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371242029849514084/1486116328732627216"
+            }
+        }
+    },
+    "rule2":{
+        "title":"📜 | Rule 2 - Be Respectful!",
+        "content":[
+            "Do not be disruptive to other people. [...] Do not engage in chaotic behaviour such as spamming, ghost-pinging, or building walls of text.",
+            "At absolutely no point will we tolerate bigotry, discrimination, nor bullying in our Scratch Community.",
+            "You are obligated to respect the consent of members; should they tell you to stop doing something within reason, stop.",
+            "If you do not respect peoples boundaries, you will not be tolerated."
+        ],
+        "url1":"https://discord.com/channels/1140996822131802192/1140996822903566347/1371242351980449883",
+        "url2":"https://discord.com/channels/1140996822131802192/1371242351980449883/1486106708790214656",
+        "subrules":{
+            "1":{
+                "title":"📖 🫵 | RULE 2.01. - \"CRAP CRITIQUE.\"",
+                "content":[
+                    "**It is forbidden for members of the Scratch Community to react negatively to the showcase posts others have made.** [...]",
+                    "You ultimately have the right to provide critique on a person's artwork (which, ideally, you should ask for consent beforehand), but make sure you do so in a way that enables the person to build upon and patch their mistakes. All art has mistakes, please don't just highlight them without offering a solution."
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371242351980449883/1486165668801024212"
+            },
+            "2":{
+                "title":"📖 🖌️ | RULE 2.02. - \"NEGATIVE PAINTING.\"",
+                "content":[
+                    "**It is forbidden for members of the Scratch Community to use this place as a tool** [...] **to portray another being in a negative light.** It does not matter whether the person in question is present or not.",
+                    "This applies to Scratch Servers too, please do not rant about the moderators of Turbowarp in our https://discord.com/channels/1140996822131802192/1140996823364943933 [...]",
+                    "[...] it is forbidden to badmouth members of the team directly. You can criticise the Scratch Team as a whole - just please do not let a name become overly targeted. [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371242351980449883/1486168415449120839"
+            },
+            "3":{
+                "title":"📖 👥 | RULE 2.03. - \"CREATE CLONE OF USER.\"",
+                "content":[
+                    "**It is forbidden for members of the Scratch Community to impersonate, pretend, or mimic another user regardless of consent.** This applies to profile picture or username changes to match another person.",
+                    "[...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371242351980449883/1508867291893207131"
+            }
+        }
+    },
+    "rule3":{
+        "title":"📜 | Rule 3 - Safe For Everyone (SFE)!",
+        "content":[
+            "We will not tolerate [...] NSFW material here. You will be punished for breaching this rule - all content, messages, etc, MUST be 13+ appropriate.",
+            "-# In the context of showcases, any gore or other possibly upsetting material should be spoilered.",
+            "If your message can be interpreted sexually, it will be interpreted sexually, and you will be punished accordingly."
+        ],
+        "url1":"https://discord.com/channels/1140996822131802192/1140996822903566347/1371242539499130911",
+        "url2":"https://discord.com/channels/1140996822131802192/1371242539499130911/1486106906467762228",
+        "subrules":{
+            "1":{
+                "title":"📖 💕 | RULE 3.01. - \"FANTASIES.\"",
+                "content":[
+                    "It is forbidden for any member of the Scratch Community to post - be it gif, text, video, or audio - content that is typically sexual in nature.",
+                    "[...]",
+                    "This rule also includes images that include the \"boykissers\" or \"femboy\" archetypes.",
+                    "[...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371242539499130911/1486119751632552046"
+            },
+            "2":{
+                "title":"📖 🩸 | RULE 3.02. - \"GORE AND GUTS.\"",
+                "content":[
+                    "-# (⚠️) This rule does NOT apply to casual gore material which are entirely, completely prohibited.",
+                    "-# (⚠️) This rule does NOT apply to sexual violence material which is entirely, completely prohibited.",
+                    "It is forbidden for any member of the Scratch Community to post artwork of a graphic nature in https://discord.com/channels/1140996822131802192/1140996823364943935 without spoilers, and ideally a descriptive content warning (But a simple 'TW - BLOOD' would suffice).",
+                    "[...] If you think you may need a Trigger Warning (TW) or Caution Warning (CW), it is best to play it safe and include those in your post, alongside spoiling the artwork. [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371242539499130911/1486155650009661482"
+            }
+        }
+    },
+    "rule4":{
+        "title":"📜 | Rule 4 - Authority are Authority!",
+        "content":[
+            "The Staff of the Scratch Community reserve the right to punish you accordingly for incorrect behaviour.",
+            "They additionally hold the last call - **if you are told to stop, you will stop.**",
+            "If you feel that there is unjust or foul play of one of the staff, below are the necessary tools to file a rightful complaint. You have a voice.",
+            "Ticket form: ||https://discord.com/channels/1140996822131802192/1140996822903566347/1466229042385518746||",
+            "[...[ Additionally, Staff will never contact you on an alternative account. [...]"
+        ],
+        "url1":"https://discord.com/channels/1140996822131802192/1140996822903566347/1371244175374291156",
+        "url2":"https://discord.com/channels/1140996822131802192/1371244175374291156/1486107076878139472",
+        "subrules":{
+            "1":{
+                "title":"📖 🙄 | RULE 4.01. - \"RULE WHINING.\"",
+                "content":[
+                    "**It is forbidden for any member of the Scratch Community to consistently complain about the rules of this server in channels where it is not appropriate.**",
+                    "[...] If there is a problem you have with the rules, raise a ticket and have a go at expressing your thoughts. Or visit https://discord.com/channels/1140996822131802192/1140996823364943936 [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371244175374291156/1494467169348489286"
+            },
+            "2":{
+                "title":"📖 🚔 | RULE 4.02. - \"MINI-MODERATION.\"",
+                "content":[
+                    "**It is forbidden for members of the community to assume or feign authority over another member** when they do not hold such power.",
+                    "While it is not problematic to remind a forgetful member of our rules, the staff team reserve the right to discourage or even punish members of the server who pretend to be authority. Please use the Herald System or our Ticket System provided, should you see a problem that needs to be reported. [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371244175374291156/1532933712721743903"
+            },
+            "3":{
+                "title":"📖 👪 | RULE 4.03. - \"THIRD PARTY.\"",
+                "content":[
+                    "**It is forbidden for members of the community to interrogate or confront staff on behalf of another person if the moderation action is not relevant to them.** Those who receive moderation are entitled to full honesty and transparency - excluding the identity of the acting moderator, who may choose to conceal their identity - about the decision and their punishment.",
+                    "Scratch Community Staff Team reserve the right to deny any information to any party that is not the recipient of the punishment. Members are not to pester staff about a decision irrelevant to them."
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371244175374291156/1532936589481607169"
+            }
+        }
+    },
+    "rule5":{
+        "title":"📜 | Rule 5 - Appropriate use of our channels!",
+        "content":[
+            "The Scratch Community staff have offered all of these channels just for your needs.",
+            "**So you are expected to use them appropriately.** [...]",
+            "There has been security guardrails to ensure that our channels are kept unique.",
+            "*If you advertise a server outside of https://discord.com/channels/1140996822131802192/1140996823364943939 repeatedly, you will be banned by our automod!*",
+            "Just be reasonable. No one likes false channels. https://discord.com/channels/1140996822131802192/1140996823364943935 is not https://discord.com/channels/1140996822131802192/1140996823364943933",
+            "An exception to this is your own thread in https://discord.com/channels/1140996822131802192/1145818943462850581. You may advertise anything **related to your project** in there."
+        ],
+        "url1":"https://discord.com/channels/1140996822131802192/1140996822903566347/1371246052648161312",
+        "url2":"https://discord.com/channels/1140996822131802192/1371246052648161312/1486107201876656220",
+        "subrules":{
+            "1":{
+                "title":"📖 🤲 | RULE 5.01. - \"REQUESTING OF STARS.\"",
+                "content":[
+                    "It is forbidden for any member of the Scratch Community to make low quality, lazy, or hastily-made posts blatantly asking for stars/likes solely to get on https://discord.com/channels/1140996822131802192/1140996822903566356 or https://discord.com/channels/1140996822131802192/1283147800133111809.",
+                    "This does not include User A asking for people to support User B's posts in https://discord.com/channels/1140996822131802192/1140996823364943935, nor does it concern users posting genuine art and asking for acknowledgement. [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371246052648161312/1486116543740903514"
+            },
+            "2":{
+                "title":"📖 🔗 | RULE 5.02. - \"REPOST THIS.\"",
+                "content":[
+                    "It is discouraged for any member of the Scratch Community to post gifs that are chainmail-adjacent and do not serve a purpose outside of https://discord.com/channels/1140996822131802192/1140996823364943937.",
+                    "Please do not post gifs that are just \"Repost if X\", \"Post this if Y\", things of that nature. [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371246052648161312/1486121465899389180"
+            },
+            "3":{
+                "title":"📖 🏴‍☠️ | RULE 5.03. - \"POST NOT OF YOUR OWN.\"",
+                "content":[
+                    "**It is forbidden for any member of the Scratch Community to post anything in https://discord.com/channels/1140996822131802192/1140996823364943935, https://discord.com/channels/1140996822131802192/1428700954626228234, nor https://discord.com/channels/1140996822131802192/1145818943462850581, if said content was not created by the poster, and said poster has not given credit to the original creator.**",
+                    "If it is suspected your showcase post has stolen another individual(s) art, or uses/includes AI 'ART' [...], there will be consequences ranging from a warn, revoking of the post from starboards, deduced XP, etc. ",
+                    "If you have had a helping hand in your creation, such as another friend, please give them the credit when it is due out of courtesy.",
+                    "If you have traced over an already existing artwork [...], please, preferably, give that original artwork credit.",
+                    "**__Under no circumstances will AI GENERATED material (e.g. Viggle Memes) or AI 'ART' showcases be tolerated in this community.__** [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371246052648161312/1486148821770698854"
+            },
+            "4":{
+                "title":"📖 👀 | RULE 5.04. - \"ATTENTION, PLEASE.\"",
+                "content":[
+                    "**When a finished artwork is posted and receives less than 5 stars and hearts (i.e. does not make it to https://discord.com/channels/1140996822131802192/1140996822903566356), the user is permitted to repost that same artwork after 48 hours.** This does not apply to 'Work In Progress', sketches, or doodle artworks, which shall not be reposted. This does not apply to 'updated' finished artworks, but it is recommended you say it was 'updated' to avoid misunderstandings. **You may only repost once.** [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371246052648161312/1498067637316620400"
+            },
+            "5":{
+                "title":"📖 🎽 | RULE 5.05. - \"POSTATHON.\"",
+                "content":[
+                    "**It is forbidden for members of the Scratch Community to post more than 5 showcases consecutively in https://discord.com/channels/1140996822131802192/1140996823364943935 unless they are all in a single message or thread.** Multi-message walls of artwork is prohibited; you must wait until other people have posted to allow everybody the exposure they seek. **You shall post an absolute maximum of 10 separate message showcases in an hour.** Art dumps are to be confined to a single message. [...]"
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371246052648161312/1508871788929749175"
+            },
+            "6":{
+                "title":"📖 🥷 | RULE 5.06. - \"ART ROBBERY.\"",
+                "content":[
+                    "It is absolutely forbidden for any member of the Scratch Community to post a stolen artwork with the intention to deceive people into believing they have created it. ",
+                    "This rule does not apply to posting art related to you, such as received art-fight attacks, paid commissions, or fan-arts, but you **must state clearly that you have not created the artwork, and you are to give the appropriate credits.**",
+                    "If it is not created by you, and is not in some way linked to you, it cannot be posted in https://discord.com/channels/1140996822131802192/1140996823364943935 [...]"
+
+                ],
+                "url":"https://discord.com/channels/1140996822131802192/1371246052648161312/1532930980837458101"
+            }
+        }
+    }
+}
