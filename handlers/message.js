@@ -1,12 +1,11 @@
 const get = require('../functions/fetch');
 const components = require('../components/export');
 const channels = require('../data/channels.json');
-const answers = require('../data/eightball.json');
+const replies = require('../data/replies.json');
 const { clientId } = require('../config.json');
 const normalize = require('../functions/normalize');
 const crypto = require('crypto');
 const semanticize = require('../functions/semanticize');
-const challenges = require('../data/challenges.json');
 const randomArrayInt = require('../functions/random');
 const type = require('../functions/type.js');
 const { PermissionFlagsBits } = require('discord.js');
@@ -27,7 +26,7 @@ const reactions = [
 
 /**
  * Capture Scratch profile links and send a preview of them
- * @param {object} message 
+ * @param {Message} message 
  */
 
 async function linkProfile(message) {
@@ -48,7 +47,7 @@ async function linkProfile(message) {
 
 /**
  * Capture Scratch project links and send a preview of them
- * @param {object} message 
+ * @param {Message} message 
  */
 
 async function linkProject(message) {
@@ -69,7 +68,7 @@ async function linkProject(message) {
 
 /**
  * Capture Scratch studio links and send a preview of them
- * @param {object} message 
+ * @param {Message} message 
  */
 
 async function linkStudio(message) {
@@ -90,7 +89,7 @@ async function linkStudio(message) {
 
 /**
  * Capture Scratch profile and project links to warn the user not to advertise
- * @param {object} message 
+ * @param {Message} message 
  */
 
 function captureLinks(message) {
@@ -121,125 +120,6 @@ function captureLinks(message) {
     }
 }
 
-/**
- * Capture 8ball questions and reply
- * @param {object} message 
- */
-
-async function eightball(message) {
-    if (message.author.id === clientId) return;
-    const content = message.content.toLowerCase();
-    const normalized = normalize(message.content);
-    const keywords = [
-        "true",
-        "false",
-        "right",
-        "wrong",
-        "bad",
-        "correct",
-        "incorrect",
-        "good",
-        "real"
-    ];
-
-    if (
-        (message.mentions.users.has(clientId) || content.includes('scratchie')) &&
-        keywords.some(word =>
-            content.includes(word)
-        )
-    ) {
-        let toHash = normalized;
-
-        if (message.reference?.messageId) {
-            const reply = await message.fetchReference().catch(() => null);
-
-            if (reply) {
-                toHash = `${normalize(reply.content)} ${normalized}`;
-            }
-        }
-
-        if (semanticize(toHash).split(' ').length > 2 || message.reference?.messageId) {
-            const hash = crypto.createHash('sha256').update(semanticize(toHash)).digest();
-            await type(message);
-            return message.reply(
-                answers[hash.readUInt32BE(0) % answers.length]
-            );
-        } else {
-            await type(message);
-            return message.reply(
-                answers[Math.floor(Math.random() * answers.length)]
-            );
-        }
-    }
-}
-
-/**
- * Capture greetings addressed to the bot and reply
- * @param {object} message 
- */
-
-async function greet(message) {
-    if (message.author.id === clientId) return;
-    const content = message.content.toLowerCase();
-    const replies = ['Hi!!', 'Nice to see you, hi!', 'Hello there!', 'Yo!', 'How\'s it going?'];
-
-    const mentioned = message.mentions.users.has(clientId) || /\bscratchie\b/i.test(content);
-
-    const greeting = /\b(hi|hello)\b/i.test(content);
-
-    if (mentioned && greeting) {
-        await type(message);
-        return message.reply(
-            replies[Math.floor(Math.random() * replies.length)]
-        );
-    }
-}
-
-/**
- * Capture truth or dare requests and respond
- * @param {object} message 
- */
-
-async function truthOrDare(message) {
-    if (message.author.id === clientId) return;
-    const content = message.content.toLowerCase();
-    const normalized = normalize(message.content);
-
-    function truth() {
-        const beginning = challenges.message[randomArrayInt(challenges.message.length)];
-        const truth = challenges.truths[randomArrayInt(challenges.truths.length)];
-        return `${beginning} ${truth}`;
-    }
-
-    function dare() {
-        const beginning = challenges.message[randomArrayInt(challenges.message.length)];
-        const dare = challenges.dares[randomArrayInt(challenges.dares.length)];
-        return `${beginning} ${dare}`;
-    }
-
-    if ((message.mentions.users.has(clientId) || content.includes('scratchie'))) {
-        if (normalized.includes('truth') && normalized.includes('dare')) {
-            await type(message);
-            if (Math.random() >= 0.5) {
-                return message.reply(truth());
-            } else {
-                return message.reply(dare());
-            }
-        } else if (normalized.includes('truth')) {
-            await type(message);
-            return message.reply(truth());
-        } else if (normalized.includes('dare')) {
-            await type(message);
-            return message.reply(dare());
-        }
-    }
-}
-
-/**
- * Check messages to see if they are eligible for auto-reactions
- * @param {object} message 
- */
-
 async function autoReact(message) {
     if (message.channelId === channels['arts-creations']) {
         const snapshot = message.messageSnapshots.first();
@@ -260,13 +140,13 @@ async function autoReact(message) {
 }
 
 /**
- * Capture requests for help and direct users to the proper channel
- * @param {object} message 
+ * Redirect help requests to the currect channel
+ * @param {Message} message
  */
 
 async function captureHelp(message) {
     if (message.author.id === clientId) return;
-    if (message.channel.parentId === channels['help-channel']) return; 
+    if (message.channel.parentId === channels['help-channel']) return;
 
     const content = message.content.toLowerCase();
 
@@ -277,7 +157,7 @@ async function captureHelp(message) {
         "i need help"
     ];
 
-    if (keyphrases.some(phrase => content.includes(phrase) )) {
+    if (keyphrases.some(phrase => content.includes(phrase))) {
         message.reply(components.container(
             `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help!`,
             16756224
@@ -286,8 +166,8 @@ async function captureHelp(message) {
 }
 
 /**
- * Capture Discord server links to warn the user not to advertise
- * @param {object} message 
+ * Delete advertising attempts
+ * @param {Message} message
  */
 
 async function antiAdvertise(message) {
@@ -305,6 +185,94 @@ async function antiAdvertise(message) {
             message.delete().catch(() => null);
         }, 1000);
     }
+};
+
+/**
+ * Various ""AI"" functions
+ * @param {Message} message 
+ */
+
+async function ai(message) {
+    if (message.author.id === clientId) return;
+    const content = message.content;
+    const mentioned = message.mentions.users.has(clientId) || /\bscratchie\b/i.test(content);
+    // easy early return if scratchie is not mentioned.
+    if (!mentioned) return;
+    const normalized = normalize(content);
+
+    const conditions = [
+        () => {
+            const greeting = /\b(hi|hello)\b/.test(normalized);
+
+            if (greeting) {
+                return replies.greetings[randomArrayInt(replies.greetings.length)];
+            }
+
+            return null;
+        },
+        () => {
+            const keywords = [
+                "true",
+                "false",
+                "right",
+                "wrong",
+                "bad",
+                "correct",
+                "incorrect",
+                "good",
+                "real"
+            ];
+
+            if (keywords.some(word => content.includes(word))) {
+                const processed = semanticize(normalized);
+                // "scratchie is this true" -> "scratchie true" -> false -> random
+                // this is so that those types of questions aren't deterministic
+                if (processed.split(' ').length > 2) {
+                    const hash = crypto.createHash('sha256').update(processed).digest();
+                    return replies.eightball[hash.readUInt32BE(0) % replies.eightball.length];
+                } else {
+                    return replies.eightball[randomArrayInt(replies.eightball.length)];
+                }
+            }
+
+            return null;
+        },
+        () => {
+            const beginning = replies.prefixes[randomArrayInt(replies.prefixes.length)];
+
+            const truth = () => {
+                return `${beginning} ${replies.truths[randomArrayInt(replies.truths.length)]}`;
+            }
+
+            const dare = () => {
+                return `${beginning} ${replies.dares[randomArrayInt(replies.dares.length)]}`;
+            }
+
+            if (/\btruth\b/.test(normalized) && /\bdare\b/.test(normalized)) {
+                if (Math.random() >= 0.5) {
+                    return truth();
+                } else {
+                    return dare();
+                }
+            } else if (/\btruth\b/.test(normalized)) {
+                return truth();
+            } else if (/\bdare\b/.test(normalized)) {
+                return dare();
+            }
+
+            return null;
+        }
+    ]
+
+    for (const condition of conditions) {
+        const text = condition();
+
+        if (text !== null) {
+            await type(message);
+            message.reply(text);
+            break;
+        }
+    }
 }
 
 module.exports = [
@@ -312,10 +280,8 @@ module.exports = [
     linkProject,
     linkStudio,
     captureLinks,
-    eightball,
-    greet,
-    truthOrDare,
     autoReact,
     captureHelp,
-    antiAdvertise
+    antiAdvertise,
+    ai
 ]
