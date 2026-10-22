@@ -16,9 +16,10 @@
                     "**It is discouraged for members of the Scratch Community to send messages in other language.**",
 
                     "**Examples include:**",
-                    "Long messages in a foreign language, regardless of if whomever present understands it or not. \n[...]",
+                    "- Long messages in a foreign language, regardless of if whomever present understands it or not. [...]",
+                    "- Images, videos, media, and the likes containing foreign sentences that need to be translated.",
 
-                    "🌐 | If you seek other language servers, do check out the regional scratch servers available."
+                    "🌐 | If you seek other language servers, do check out the [regional scratch servers](https://discord.com/channels/1140996822131802192/1140996822903566351/1371516529228910733) available."
                 ],
                 "url":"https://discord.com/channels/1140996822131802192/1371242029849514084/1486116328732627216"
             }
@@ -38,6 +39,9 @@
             "1":{
                 "title":"📖 🫵 | RULE 2.01. - \"CRAP CRITIQUE.\"",
                 "content":[
+                    "**Examples include:**",
+                    "- Name-calling a person's project's UI negatively without providing productive feedback for the person to work with.",
+                    "- Downright insults of a person's craft. \n[...]",
                     "**It is forbidden for members of the Scratch Community to react negatively to the showcase posts others have made.** [...]",
                     "You ultimately have the right to provide critique on a person's artwork (which, ideally, you should ask for consent beforehand), but make sure you do so in a way that enables the person to build upon and patch their mistakes. All art has mistakes, please don't just highlight them without offering a solution."
                 ],
