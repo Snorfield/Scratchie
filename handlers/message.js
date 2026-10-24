@@ -149,11 +149,17 @@ async function captureCollab(message) {
     if (message.channel.parentId === channels['help-channel']) return; 
 
     const content = message.content.toLowerCase();
-
     const keyphrases = [
         "collab with",
         "i am hiring",
-        "help me with"
+        "help me collaborate",
+        "looking for a collab",
+        "looking for a collaborator",
+        "looking for collaborators",
+        "looking for someone to collab with",
+        "looking for someone to collaborate with",
+        "looking for someone to work with",
+        "looking for someone to work on a project with"
     ];
 
     if (keyphrases.some(phrase => content.includes(phrase) )) {
