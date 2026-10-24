@@ -23,6 +23,22 @@ const reactions = [
     { regex: /\bpico\b/i, emoji: '1465845424421081259' },
     { regex: /\bzepto\b/i, emoji: '1492169432070619216' }
 ];
+const levelRoles = {
+    "Dot": "1265419298889797713",
+    "Pico": "1265429474820751423",
+    "Nano": "1265419326995960008",
+    "Giga": "1265419269521543238",
+    "Tera": "1265419238948995174",
+    "Gobo": "1265414868903788756",
+    "Milli": "1493340231657717872",
+    "Zepto": "1493340287123062986",
+    "Scratcher": "1265435252025856034",
+    "Member": "1140996822131802199"
+};
+const lookForTheseRoles = [
+  levelRoles.Dot,
+  levelRoles.Pico
+];
 
 /**
  * Capture Scratch profile links and send a preview of them
@@ -149,23 +165,10 @@ async function captureHelp(message) {
     if (message.channel.parentId === channels['help-channel']) return;
     
     const roles = message.member.roles.cache;
-    const levelRoles = {
-        "Dot": "1265419298889797713",
-        "Pico": "1265429474820751423",
-        "Nano": "1265419326995960008",
-        "Giga": "1265419269521543238",
-        "Tera": "1265419238948995174",
-        "Gobo": "1265414868903788756",
-        "Milli": "1493340231657717872",
-        "Zepto": "1493340287123062986",
-        "Scratcher": "1265435252025856034"
-    };
 
-    const member = roles.has('1140996822131802199');
-    const hasLevelRole = Object.values(levelRoles).some(id => roles.has(id));
-    const newMember = member && !hasLevelRole;
-    const hasDot = roles.has(levelRoles.Dot);
-    const hasPico = roles.has(levelRoles.Pico);
+    const member = roles.has(levelRoles.Member);
+    const hasLevelRole = lookForTheseRoles.some(id => roles.has(id));
+    const isEligibleMember = (member && !hasLevelRole) || roles.has(levelRoles.Dot) || roles.has(levelRoles.Pico);
 
     const content = message.content.toLowerCase();
     const keyphrases = [
@@ -175,7 +178,7 @@ async function captureHelp(message) {
         "i need help"
     ];
 
-    if (newMember || hasDot || hasPico) {
+    if (isEligibleMember) {
       if (keyphrases.some(phrase => content.includes(phrase))) {
         message.reply(components.container(
             `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help!`,
