@@ -35,10 +35,6 @@ const levelRoles = {
     "Scratcher": "1265435252025856034",
     "Member": "1140996822131802199"
 };
-const lookForTheseRoles = [
-  levelRoles.Dot,
-  levelRoles.Pico
-];
 
 /**
  * Capture Scratch profile links and send a preview of them
@@ -163,8 +159,11 @@ async function autoReact(message) {
 async function captureHelp(message) {
     if (message.author.id === clientId) return;
     if (message.channel.parentId === channels['help-channel']) return;
-    
     const roles = message.member.roles.cache;
+    const lookForTheseRoles = [
+     levelRoles.Dot,
+     levelRoles.Pico
+    ];
 
     const member = roles.has(levelRoles.Member);
     const hasLevelRole = lookForTheseRoles.some(id => roles.has(id));
