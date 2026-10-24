@@ -160,14 +160,10 @@ async function captureHelp(message) {
     if (message.author.id === clientId) return;
     if (message.channel.parentId === channels['help-channel']) return;
     const roles = message.member.roles.cache;
-    const lookForTheseRoles = [
-     levelRoles.Dot,
-     levelRoles.Pico
-    ];
 
     const member = roles.has(levelRoles.Member);
-    const hasLevelRole = lookForTheseRoles.some(id => roles.has(id));
-    const isEligibleMember = (member && !hasLevelRole) || roles.has(levelRoles.Dot) || roles.has(levelRoles.Pico);
+    const hasLevelRole = roles.has(levelRoles.Dot) || roles.has(levelRoles.Pico);
+    const isEligibleMember = member && !hasLevelRole;
 
     const content = message.content.toLowerCase();
     const keyphrases = [
