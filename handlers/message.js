@@ -186,8 +186,9 @@ async function captureCollab(message) {
 async function captureHelp(message) {
     if (message.author.id === clientId) return;
     if (message.channel.parentId === channels['help-channel']) return;
-    const roles = message.member.roles.cache;
-
+    const roles = message?.member?.roles?.cache;
+    if (!roles) return;
+    
     const member = roles.has(levelRoles.Member);
     const hasLevelRole = roles.has(levelRoles.Dot) || roles.has(levelRoles.Pico);
     const isEligibleMember = (member && !hasLevelRole) || hasLevelRole;
