@@ -163,8 +163,8 @@ async function captureHelp(message) {
 
     const member = roles.has(levelRoles.Member);
     const hasLevelRole = roles.has(levelRoles.Dot) || roles.has(levelRoles.Pico);
-    const isEligibleMember = member && !hasLevelRole;
-
+    const isEligibleMember = (member && !hasLevelRole) || hasLevelRole;
+    
     const content = message.content.toLowerCase();
     const keyphrases = [
         "get help",
