@@ -152,14 +152,10 @@ async function captureCollab(message) {
     const keyphrases = [
         "collab with",
         "i am hiring",
-        "help me collaborate",
         "looking for a collab",
-        "looking for a collaborator",
-        "looking for collaborators",
         "looking for someone to collab with",
-        "looking for someone to collaborate with",
-        "looking for someone to work with",
-        "looking for someone to work on a project with"
+        "join a collab",
+        "Invite me to a collab"
     ];
 
     if (keyphrases.some(phrase => content.includes(phrase) )) {
