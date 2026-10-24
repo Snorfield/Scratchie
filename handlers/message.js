@@ -140,6 +140,33 @@ async function autoReact(message) {
 }
 
 /**
+ * Capture requests for collaboration and direct users to the proper channel
+ * @param {object} message 
+ */
+
+async function captureCollab(message) {
+    if (message.author.id === clientId) return;
+    if (message.channel.parentId === channels['collab-channel']) return;
+
+    const content = message.content.toLowerCase();
+    const keyphrases = [
+        "collab with",
+        "i am hiring",
+        "looking for a collab",
+        "looking for someone to collab with",
+        "join a collab",
+        "invite me to a collab"
+    ];
+
+    if (keyphrases.some(phrase => content.includes(phrase) )) {
+        message.reply(components.container(
+            `👋 Hey <@${message.author.id}>, if you are looking to collaborate with someone, please use https://discord.com/channels/1140996822131802192/1141402927999762462 to get assistance!`,
+            16756224
+        ));
+    }
+}
+
+/**
  * Redirect help requests to the currect channel
  * @param {Message} message
  */
@@ -283,5 +310,6 @@ module.exports = [
     autoReact,
     captureHelp,
     antiAdvertise,
+    captureCollab,
     ai
 ]
