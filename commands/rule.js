@@ -1,7 +1,9 @@
 const components = require('../components/export');
 const rules = require('../data/rules.json');
+const { PermissionFlagsBits } = require('discord.js');
 
 async function rule(interaction) {
+if (interaction.member?.permissions.has(PermissionFlagsBits.ModerateMembers)) {
     // we don't change this, use const.
     const selection = interaction.options.getString("rule");
 
@@ -24,11 +26,14 @@ async function rule(interaction) {
             rules["rule"+selection[0]].subrules[selection[2]].content.join("\n"),
             rules["rule"+selection[0]].url1, rules["rule"+selection[0]].subrules[selection[2]].url,
             true
-          )
         )
-    } else {
-        return interaction.reply("This rule is unavailable at the moment.");
-    };
+    )
+   } else {
+    return interaction.reply("This rule is unavailable at the moment.");
+   }
+  } else {
+    return interaction.reply({ content: "Staff only." });
+  }
 }
 
 module.exports = rule;
