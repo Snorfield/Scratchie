@@ -146,7 +146,7 @@ async function autoReact(message) {
 
 async function captureCollab(message) {
     if (message.author.id === clientId) return;
-    if (message.channel.id === '1141402927999762462') return;
+    if (message.channel.parentId === channels['collab-channel']) return;
 
     const content = message.content.toLowerCase();
     const keyphrases = [
