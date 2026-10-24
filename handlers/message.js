@@ -165,8 +165,6 @@ async function captureCollab(message) {
 }
 
 /**
- * Capture requests for help and direct users to the proper channel
- * @param {object} message 
  * Redirect help requests to the currect channel
  * @param {Message} message
  */
@@ -310,6 +308,6 @@ module.exports = [
     autoReact,
     captureHelp,
     antiAdvertise,
-    captureCollab
+    captureCollab,
     ai
 ]
