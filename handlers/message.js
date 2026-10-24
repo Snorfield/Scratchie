@@ -9,12 +9,13 @@ const semanticize = require('../functions/semanticize');
 const randomArrayInt = require('../functions/random');
 const type = require('../functions/type.js');
 const { PermissionFlagsBits } = require('discord.js');
+const emojis = require('../data/emojis.json');
 
 const reactions = [
     { regex: /penguinmod/i, emoji: '🐧' },
     { regex: /nitrobolt/i, emoji: '⚡' },
     { regex: /turbowarp/i, emoji: '🍡' },
-    { regex: /^(hi|hello|hiya|sup|hey)$/i, emoji: '1359604048801829114' },
+    { regex: /^(hi|hello|hiya|sup|hey)$/i, emoji: `${emojis.wave}` },
     { regex: /\bgobo\b/i, emoji: '1465845363326976343' },
     { regex: /\bgiga\b/i, emoji: '1465845449524252703' },
     { regex: /\btera\b/i, emoji: '1465845334126100695' },
