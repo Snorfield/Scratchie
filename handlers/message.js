@@ -188,7 +188,7 @@ async function captureHelp(message) {
 
 async function antiAdvertise(message) {
     if (message.author.id === clientId) return;
-    if (message.channel.id === channels['advertisement']) return;
+    if (message.channel.id === channels['advertisement-channel']) return;
     if (message.member?.permissions.has(PermissionFlagsBits.ModerateMembers)) return;
 
     if (/discord.com\/invite\/[a-zA-Z0-9-]+/i.test(message.content) || /discord.gg\/[a-zA-Z0-9-]+/i.test(message.content)) {
