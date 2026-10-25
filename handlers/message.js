@@ -300,6 +300,5 @@ module.exports = [
     autoReact,
     captureHelp,
     antiAdvertise,
-    captureCollab,
     ai
 ]
