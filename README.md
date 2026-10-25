@@ -49,6 +49,7 @@ Show a short preview of a rule (reserved for staff)
 Thanks to all our great contributors!
 - **rosics-code**: Developer
 - **Snorfield**: Maintainer, reviewer and engineering lead
+- **man_o_valor**: Hosting
 - **josh-cubed**: Reviewer and developer
 - **raynepaws**: Periodic contributor
 - **thecolorbluu**: Periodic contributor
