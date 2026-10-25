@@ -10,6 +10,7 @@ const randomArrayInt = require('../functions/random');
 const type = require('../functions/type.js');
 const { PermissionFlagsBits } = require('discord.js');
 const emojis = require('../data/emojis.json');
+const roles = require('../data/roles.json');
 
 const reactions = [
     { regex: /penguinmod/i, emoji: '🐧' },
@@ -141,34 +142,7 @@ async function autoReact(message) {
 }
 
 /**
- * Capture requests for collaboration and direct users to the proper channel
- * @param {object} message 
- */
-
-async function captureCollab(message) {
-    if (message.author.id === clientId) return;
-    if (message.channel.parentId === channels['collab-channel']) return;
-
-    const content = message.content.toLowerCase();
-    const keyphrases = [
-        "collab with",
-        "i am hiring",
-        "looking for a collab",
-        "looking for someone to collab with",
-        "join a collab",
-        "invite me to a collab"
-    ];
-
-    if (keyphrases.some(phrase => content.includes(phrase) )) {
-        message.reply(components.container(
-            `👋 Hey <@${message.author.id}>, if you are looking to collaborate with someone, please use https://discord.com/channels/1140996822131802192/1141402927999762462 to get assistance!`,
-            16756224
-        ));
-    }
-}
-
-/**
- * Redirect help requests to the currect channel
+ * Redirect help and collaboration requests to the currect channel
  * @param {Message} message
  */
 
@@ -176,18 +150,33 @@ async function captureHelp(message) {
     if (message.author.id === clientId) return;
     if (message.channel.parentId === channels['help-channel']) return;
 
+    const userRoles = message?.member?.roles?.cache;
+    if (!userRoles) return;
+    const hasLevelRole = userRoles.has(roles.Pico) || userRoles.has(roles.Dot);
+    const newUser = (userRoles.has(roles.Member) && !hasLevelRole) || hasLevelRole;
+    if (!newUser) return;
+
     const content = message.content.toLowerCase();
 
-    const keyphrases = [
+    const helpPhrases = [
         "get help",
         "help me",
         "help with",
         "i need help"
     ];
 
-    if (keyphrases.some(phrase => content.includes(phrase))) {
-        message.reply(components.container(
+    if (helpPhrases.some(phrase => content.includes(phrase))) {
+        return message.reply(components.container(
             `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141083052076957887 if you need help!`,
+            16756224
+        ));
+    }
+
+    // we don't need specific phrases for this because it's already returning if you're not a new member.
+    // So we can assume a new member mentioning collab probably means this.
+    if (content.includes('collab')) {
+        return message.reply(components.container(
+            `👋 Hey <@${message.author.id}>, please check out https://discord.com/channels/1140996822131802192/1141402927999762462 if you would like to collaborate!`,
             16756224
         ));
     }
