@@ -6,8 +6,9 @@
 
 ## Medium
 - Rewrite to ESM JavaScript
-- Refactor redundant code. All role snowflakes should be moved to a single JSON file, and all channels should be mapped in a JSON file with their snowflake id. This way we can actually just import the channels from anywhere we need it.
 
 ## Cosmetic
 - New status messages (maybe we could make this a server event to come up with status messages)
 - Bot banner (this could also be a server event)
+- Stylize/add more to some commands like Profile or Studio.
+  
