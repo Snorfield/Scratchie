@@ -50,5 +50,5 @@ Thanks to all our great contributors!
 - **rosics-code**: Developer
 - **Snorfield**: Maintainer, reviewer and engineering lead
 - **josh-cubed**: Reviewer and developer
-- **raynepaws**: One line of code
+- **raynepaws**: Periodic contributor
 - **thecolorbluu**: Periodic contributor
