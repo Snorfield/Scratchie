@@ -1,8 +1,8 @@
 const { Client, Events, GatewayIntentBits, ChannelType, WebhookClient, AuditLogEvent } = require('discord.js');
 const { token, loggingWebhook, statusUpdate } = require('./config.json');
-const commands = require('./commands/export');
-const components = require('./components/export');
-const statuses = require('./data/status.json');
+const commands = require('./src/commands/export');
+const components = require('./src/components/export');
+const statuses = require('./src/data/status.json');
 
 // Handlers
 const messageHandlers = require('./src/handlers/message');
