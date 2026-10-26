@@ -5,8 +5,8 @@ const components = require('./components/export');
 const statuses = require('./data/status.json');
 
 // Handlers
-const messageHandlers = require('./handlers/message');
-const threadHandlers = require('./handlers/thread');
+const messageHandlers = require('./src/handlers/message');
+const threadHandlers = require('./src/handlers/thread');
 
 const client = new Client({
 	intents: [
