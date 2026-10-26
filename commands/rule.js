@@ -32,7 +32,7 @@ if (interaction.member?.permissions.has(PermissionFlagsBits.ModerateMembers)) {
     return interaction.reply("This rule is unavailable at the moment.");
    }
   } else {
-    return interaction.reply({ content: "Staff only." });
+    return interaction.reply({ content: "Staff only.", ephemeral: true });
   }
 }
 
