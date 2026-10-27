@@ -2,7 +2,6 @@ const get = require('../functions/fetch');
 const components = require('../components/export');
 const emojis = require('../data/emojis.json');
 
-
 async function explore(interaction) {
     await interaction.deferReply();
 
