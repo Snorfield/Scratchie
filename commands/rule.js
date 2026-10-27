@@ -32,7 +32,7 @@ if (interaction.member?.permissions.has(PermissionFlagsBits.ModerateMembers)) {
     return interaction.reply("This rule is unavailable at the moment.");
    }
   } else {
-    return interaction.reply({ content: "Staff only.", ephemeral: true });
+    return interaction.reply({ content: "[Sorry, this command is for staff usage only.](https://discord.com/channels/1140996822131802192/1140996822903566347)", ephemeral: true });
   }
 }
 
