@@ -26,8 +26,8 @@ If you were able to setup `config.json`, skip this step below and move on to 'Ru
 Run in a terminal of your choice:
 ```bash
 npm install
-node register.js
-node index.js
+npm run register
+npm run start
 ```
 
 The bot should be online after this.
