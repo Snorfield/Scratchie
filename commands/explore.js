@@ -1,5 +1,6 @@
 const get = require('../functions/fetch');
 const components = require('../components/export');
+const emojis = require('../data/emojis.json');
 
 async function explore(interaction) {
     await interaction.deferReply();
@@ -65,7 +66,7 @@ async function explore(interaction) {
         });
     } else {
         return interaction.editReply(components.container(
-            "Error while fetching explore information",
+            `${emojis.error} Error while fetching explore information`,
             16756224
         ));
     }
