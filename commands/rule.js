@@ -4,10 +4,8 @@ const { PermissionFlagsBits } = require('discord.js');
 
 async function rule(interaction) {
 if (interaction.member?.permissions.has(PermissionFlagsBits.ModerateMembers)) {
-    // we don't change this, use const.
     const selection = interaction.options.getString("rule");
 
-    // use endsWith here, don't need a full includes()
     if (selection.endsWith("separator")) {
         return interaction.reply({ content: 'no.', ephemeral: true });
     } else if (selection.length === 5) {
@@ -32,7 +30,7 @@ if (interaction.member?.permissions.has(PermissionFlagsBits.ModerateMembers)) {
     return interaction.reply("This rule is unavailable at the moment.");
    }
   } else {
-    return interaction.reply({ content: "[Sorry, this command is for staff usage only.](https://discord.com/channels/1140996822131802192/1140996822903566347)", ephemeral: true });
+    return interaction.reply({ content: "Sorry, this command is for staff usage only. You can view the rules at https://discord.com/channels/1140996822131802192/1140996822903566347", ephemeral: true });
   }
 }
 
