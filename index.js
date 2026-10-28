@@ -66,8 +66,8 @@ client.on(Events.GuildBanAdd, async ban => {
 
         const rawMsg = banMsg[Math.floor(Math.random() * banMsg.length)];
 		const formattedMsg = rawMsg
-		 .replaceAll('{mention}', ban.user.toString())
-         .replaceAll('{server(members)}', ban.guild.memberCount.toString());
+		 .replaceAll('{mention}', ban.user)
+         .replaceAll('{server(members)}', ban.guild.memberCount);
 
 		const banChannelEmbed = new EmbedBuilder()
 		  .setAuthor({
@@ -122,8 +122,8 @@ client.on('guildMemberAdd', async (member) => {
 
         const rawMsg = joinMsg[Math.floor(Math.random() * joinMsg.length)];
 		const formattedMsg = rawMsg
-		  .replaceAll('{mention}', member.toString())
-          .replaceAll('{server(members)}', member.guild.memberCount.toString());
+		  .replaceAll('{mention}', member)
+          .replaceAll('{server(members)}', member.guild.memberCount);
 
 		const joinChannelEmbed = new EmbedBuilder()
 		  .setAuthor({
@@ -150,8 +150,8 @@ client.on('guildMemberRemove', async (member) => {
 
         const rawMsg = leaveMsg[Math.floor(Math.random() * leaveMsg.length)];
 		const formattedMsg = rawMsg
-		  .replaceAll('{mention}', member.toString())
-          .replaceAll('{server(members)}', member.guild.memberCount.toString());
+		  .replaceAll('{mention}', member)
+          .replaceAll('{server(members)}', member.guild.memberCount);
 
 		const leaveChannelEmbed = new EmbedBuilder()
 		  .setAuthor({
