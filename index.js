@@ -87,35 +87,6 @@ client.on(Events.GuildBanAdd, async ban => {
 });
 
 client.on('guildMemberAdd', async (member) => {
-  const welcomeDmEmbed = new EmbedBuilder()
-    .setColor('#f0a543')
-    .setTitle(`✉️ You've got mail!`)
-    .setDescription(`
-	## Thank you for joining. We are happy to have you here with us in Scratch Community!
-	<:terablush:1497663771433373866> <:teranauseated:1497665373913223351> <:teraneutral:1497666172022161608> <:terastarstruck:1468295970503524392> <:teralove:1468297304720277528> <:teralaugh:1468302443392798864> <:terajoy:1468304629803651125> <:terarainbow:1473097998908002314> <:terapuppy:1473102728250261506>
-	**__We hope this server is a pleasant experience to you.__**
-	In cases of enquiry/server concerns, our mod-mail form is: ||https://dyno.gg/form/55856153||
-	Also, you may want to check out our [ticket system](https://discord.com/channels/1140996822131802192/1140996822903566347/1466229042385518746).
-	In cases of emergency, our ban appeal form is: || https://dyno.gg/form/ba0b1678 ||
-    
-	# __IMPORTANT INFORMATION.__
-	There are **NO** official scratch servers. **ALL** scratch servers are owned by fans of scratch, not official members of the Scratch Team! Staff are **not** Scratch Team!
-	If you have any problems regarding scratch, that only a Scratch Team member can help you with (e.g. concerns about a ban), **YOU WILL NOT FIND HELP ON DISCORD!**
-	If you need to contact the Scratch Team, you should [send them an email](https://scratch.mit.edu/contact-us/)!
-	Automated DM to newcomers set up by the staff of Scratch Community.
-	## __We will *never* message you on an alternate account, ask you to join a server, or invite you to a website of the 'Scratch Community' name. Beware of scams!__`)
-	 .setThumbnail('https://media.discordapp.net/attachments/1140996822656106528/1345885362463178812/Stuff__SCICasd_1.png?ex=67c62ceb&is=67c4db6b&hm=b640e20124dcd53d198bfb97260b691987985d66e07510e83f68c076c0bb859f&=&form')
-	 .setImage('https://media.discordapp.net/attachments/877924620311855104/1466242710620078315/scratchcommunityclogo.png?ex=697c086f&is=697ab6ef&hm=23a885fe76dc3877fbcb8c0a2476b3a54ed829322ed1db459db1e52fc100ce03&=&')
-     .setFooter({ 
-		text: '🐱 See you later!' 
-	});
-
-    try {
-      await member.send({ embeds: [welcomeDmEmbed] });
-    } catch (error) {
-	  console.log(error);
-	};
-
 	try {
 		const channel = member.guild.channels.cache.get(channels['welcome']);
 		if (!channel) return;
