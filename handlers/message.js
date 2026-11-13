@@ -183,28 +183,6 @@ async function captureHelp(message) {
 }
 
 /**
- * Delete advertising attempts
- * @param {Message} message
- */
-
-async function antiAdvertise(message) {
-    if (message.author.id === clientId) return;
-    if (message.channel.id === '1140996823364943939') return;
-    if (message.member?.permissions.has(PermissionFlagsBits.ModerateMembers)) return;
-
-    if (/discord.com\/invite\/[a-zA-Z0-9-]+/i.test(message.content) || /discord.gg\/[a-zA-Z0-9-]+/i.test(message.content)) {
-        message.reply(components.container(
-            `‼️ Hey <@${message.author.id}>, server advertisements aren't allowed here. Please move to https://discord.com/channels/1140996822131802192/1140996823364943939 if you wish to advertise.`,
-            16756224
-        ));
-
-        setTimeout(() => {
-            message.delete().catch(() => null);
-        }, 1000);
-    }
-};
-
-/**
  * Various ""AI"" functions
  * @param {Message} message 
  */
@@ -299,6 +277,5 @@ module.exports = [
     captureLinks,
     autoReact,
     captureHelp,
-    antiAdvertise,
     ai
 ]
