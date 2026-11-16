@@ -1,19 +1,38 @@
-const { Client, Events, GatewayIntentBits, ChannelType, WebhookClient, AuditLogEvent } = require('discord.js');
+const { Client, Events, GatewayIntentBits, ChannelType, WebhookClient, AuditLogEvent, EmbedBuilder } = require('discord.js');
 const { token, loggingWebhook, statusUpdate } = require('./config.json');
 const commands = require('./commands/export');
 const components = require('./components/export');
 const statuses = require('./data/status.json');
+const joinMsg = require('./data/joinMsg.json');
+const leaveMsg = require('./data/leaveMsg.json');
+const banMsg = require('./data/banMsg.json');
+const channels = require('./data/channels.json');
 
 // Handlers
 const messageHandlers = require('./handlers/message');
 const threadHandlers = require('./handlers/thread');
+const randomArrayInt = require('./functions/random');
+const joinMsgImg = [
+	"https://media.discordapp.net/attachments/1513334966279344161/1564795932304875570/Nanojoin2.png?ex=6ae29146&is=6ae13fc6&hm=fb4cb77d1c505cc3d62adb031e278ac7ec9c53ecd2535835594ffcb97d9906c5&=&format=webp&quality=lossless",
+	"https://media.discordapp.net/attachments/1513334966279344161/1564795934150234243/Scratchjoin2.png?ex=6ae29147&is=6ae13fc7&hm=5e5d85dc5d78fb68892a0bc1587342b9411cb4f7490364c77b7ecfc84d8b8369&=&format=webp&quality=lossless",
+	"https://cdn.discordapp.com/attachments/1513334966279344161/1564795934494298112/GoboJoin.png?ex=6ae29147&is=6ae13fc7&hm=c4bbe2c3846b84fd1c788afbc4960c59cf3975bef4d2d44296e82fee67f6b375&=&format=webp&quality=lossless",
+	"https://cdn.discordapp.com/attachments/1513334966279344161/1564805588721074307/Gigajoin.png?ex=6ae29a45&is=6ae148c5&hm=6e1f2a8a029cb796dc75b69c95505dd0b6bfb85b080d76956291679b5560f8cd&",
+    "https://cdn.discordapp.com/attachments/1513334966279344161/1564805589299761202/Terajoin1.png?ex=6ae29a45&is=6ae148c5&hm=b8d63af6373ab27d6fe11dadb58b913ea645c102c4533cd17cd1c79dcc8b4d5f&",
+	"https://cdn.discordapp.com/attachments/1513334966279344161/1564805589631115344/Terajoin2.png?ex=6ae29a45&is=6ae148c5&hm=e1829115308827a1e9a46657ae69643012f65cb323c59cdf0194f2ee60ecde14&"
+];
+const leaveMsgImg = [
+	"https://cdn.discordapp.com/attachments/1513334966279344161/1564795932707397682/PicoAbandonment.png?ex=6ae29146&is=6ae13fc6&hm=cb09e24823e9ca1be101a35887ead9aa96fd9a89ecae6d1b45d1df2f489590c5&",
+	"https://cdn.discordapp.com/attachments/1513334966279344161/1564795933093527632/costume3_3.png?ex=6ae29146&is=6ae13fc6&hm=cf0b49099b0ce2f7478903edff5e1ea26114c9cdddbbc986c4785646b004ba5c&",
+	"https://cdn.discordapp.com/attachments/1513334966279344161/1564795933441658900/gigaleave.png?ex=6ae29147&is=6ae13fc7&hm=011aefd58c239dbfeecb592c722832adead3ac20fedeb31d7fc18307bdf42817&"
+];
 
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.GuildModeration
+		GatewayIntentBits.GuildModeration,
+		GatewayIntentBits.GuildMembers
 	],
 });
 
@@ -39,6 +58,87 @@ client.on(Events.GuildBanAdd, async ban => {
 		});
 	} catch (error) {
 		console.error(error);
+	}
+
+    try {
+		const channel = ban.guild.channels.cache.get(channels['welcome']);
+		if (!channel) return;
+
+        const rawMsg = banMsg[Math.floor(Math.random() * banMsg.length)];
+		const formattedMsg = rawMsg
+		 .replaceAll('{mention}', ban.user)
+         .replaceAll('{server(members)}', ban.guild.memberCount);
+
+		const banChannelEmbed = new EmbedBuilder()
+		  .setAuthor({
+			name: `🚫 | ${ban.guild.memberCount} members`,
+		  })
+		  .setColor('#d87e7e')
+          .setDescription(formattedMsg)
+		  .setFooter({ 
+          text: `🚩 ${ban.user.username} should've done better...`
+		})
+		.setImage('https://cdn.discordapp.com/attachments/1513334966279344161/1564802706118549664/BANNED.png?ex=6ae29795&is=6ae14615&hm=ad87631374c0c8111c5a7c2650fa4b9ebc481866c7cb1e243fce2a4c38b2215d&');
+
+		await channel.send({ embeds: [banChannelEmbed] });
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+client.on('guildMemberAdd', async (member) => {
+	try {
+		const channel = member.guild.channels.cache.get(channels['welcome']);
+		if (!channel) return;
+
+        const rawMsg = joinMsg[Math.floor(Math.random() * joinMsg.length)];
+		const formattedMsg = rawMsg
+		  .replaceAll('{mention}', member)
+          .replaceAll('{server(members)}', member.guild.memberCount);
+
+		const joinChannelEmbed = new EmbedBuilder()
+		  .setAuthor({
+            name: `💚 | The ${member.guild.memberCount}th member!`,
+          })
+		  .setColor('#aee9a2')
+          .setDescription(formattedMsg)
+		  .setImage(joinMsgImg[randomArrayInt(joinMsgImg.length)])
+		  .setFooter({ 
+          text: `👋 ${member.user.username} has joined the server!`
+		})
+		  .setThumbnail(member.user.displayAvatarURL({ dynamic: true }));
+
+		await channel.send({ embeds: [joinChannelEmbed] });
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+client.on('guildMemberRemove', async (member) => {
+  	try {
+		const channel = member.guild.channels.cache.get(channels['welcome']);
+		if (!channel) return;
+
+        const rawMsg = leaveMsg[Math.floor(Math.random() * leaveMsg.length)];
+		const formattedMsg = rawMsg
+		  .replaceAll('{mention}', member)
+          .replaceAll('{server(members)}', member.guild.memberCount);
+
+		const leaveChannelEmbed = new EmbedBuilder()
+		  .setAuthor({
+            name: `🔴 | ${member.guild.memberCount} members`,
+          })
+		  .setColor('#d87e7e')
+          .setDescription(formattedMsg)
+		  .setFooter({ 
+          text: `👋 ${member.user.username} has left the server!`
+		})
+		  .setImage(leaveMsgImg[randomArrayInt(leaveMsgImg.length)])
+		  .setThumbnail(member.user.displayAvatarURL({ dynamic: true }));
+
+		await channel.send({ embeds: [leaveChannelEmbed] });
+	} catch (error) {
+		console.log(error);
 	}
 });
 
