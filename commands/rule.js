@@ -5,7 +5,7 @@ const users = require('../data/users.json');
 
 async function rule(interaction) {
 if ( 
-    interaction.user.id === `{users.John}` ||
+    interaction.user.id === `${users.John}` ||
     interaction.member?.permissions.has(PermissionFlagsBits.ModerateMembers)
   ) {
     const selection = interaction.options.getString("rule");
