@@ -1,10 +1,11 @@
 const components = require('../components/export');
 const rules = require('../data/rules.json');
 const { PermissionFlagsBits } = require('discord.js');
+const users = require('../data/users.json');
 
 async function rule(interaction) {
 if ( 
-    interaction.user.id === "1115286189243641896" ||
+    interaction.user.id === `${users.John}` ||
     interaction.member?.permissions.has(PermissionFlagsBits.ModerateMembers)
   ) {
     const selection = interaction.options.getString("rule");
