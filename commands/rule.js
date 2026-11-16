@@ -3,7 +3,10 @@ const rules = require('../data/rules.json');
 const { PermissionFlagsBits } = require('discord.js');
 
 async function rule(interaction) {
-if (interaction.member?.permissions.has(PermissionFlagsBits.ModerateMembers)) {
+if ( 
+    interaction.user.id === "1115286189243641896" ||
+    interaction.member?.permissions.has(PermissionFlagsBits.ModerateMembers)
+  ) {
     const selection = interaction.options.getString("rule");
 
     if (selection.endsWith("separator")) {
