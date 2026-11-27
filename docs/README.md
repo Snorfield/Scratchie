@@ -57,9 +57,9 @@ Show a short preview of a rule (reserved for staff)
 ## Developers & Contributors
 ### Developers
 Thanks to all our great developers!
-- **Snorfield**: Maintainer, reviewer and engineering lead
-- **rosics-code**: Developer
-- **josh-cubed**: Reviewer and developer
+- **Snorfield (sborf)**: Maintainer, reviewer and engineering lead
+- **rosics-code (John)**: Developer
+- **josh-cubed (Josh)**: Reviewer and developer
 ### Contributors
 Thanks to all our great contributors!
 - **raynepaws**: Periodic contributor
